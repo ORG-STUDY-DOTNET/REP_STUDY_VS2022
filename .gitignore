@@ -1,0 +1,7 @@
+# 以下写法表示忽略这个文件夹下的所有内容
+# Sln.Study.VS2022/*
+
+# 以下写法表示忽略 .vs 文件夹，及任意项目下的 bin 和 obj 目录
+Sln.Study.VS2022/.vs/
+Sln.Study.VS2022/*/bin
+Sln.Study.VS2022/*/obj
