@@ -1,3 +1,12 @@
+# 关于使用 VS2022 打开 VS2012 项目的问题
+```
+1. 最终可以打开并编译运行代码，也可以运行 T4 模板，但是需要手动逐个项目安装：
+	1. Install-Package Microsoft.NETFramework.ReferenceAssemblies.net45 -Version 1.0.2
+	2. 因为 VS2022 不再对 .net 4.5 作出支持
+2. 可以创建 Ado.net 实体对象模型，一切正常
+3. 最终可以运行，但是仍需要一个针对 VS2022 的优化版
+```
+
 # REP_STUDY_VS2022
 始于刚开始安装 vs2022 后的BS项目创建测试
 
