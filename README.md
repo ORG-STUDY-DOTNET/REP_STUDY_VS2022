@@ -88,3 +88,10 @@ create table TOrder
 dotnet ef dbcontext scaffold "server=localhost;uid=root;pwd=???;port=3306;database=studyvs2022;" "Pomelo.EntityFrameworkCore.MySql" -c TestContext -o AutoModels -f
 错误：这里提示：The framework 'Microsoft.NETCore.App', version '2.0.0' (x64) was not found.
 （这里生成一下解决方案，再执行就可以了）
+```
+
+## 9. 生成的类名与属性与数据库中保持一致：
+```
+添加  --use-database-names：
+dotnet ef dbcontext scaffold "server=localhost;uid=root;pwd=???;port=3306;database=studyvs2022;" "Pomelo.EntityFrameworkCore.MySql" --use-database-names -c TestContext -o AutoModels -f
+```

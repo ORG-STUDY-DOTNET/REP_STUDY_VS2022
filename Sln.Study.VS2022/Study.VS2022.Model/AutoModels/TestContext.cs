@@ -16,8 +16,8 @@ namespace Study.VS2022.Model.AutoModels
         {
         }
 
-        public virtual DbSet<Torder> Torders { get; set; } = null!;
-        public virtual DbSet<Tuser> Tusers { get; set; } = null!;
+        public virtual DbSet<TOrder> TOrders { get; set; } = null!;
+        public virtual DbSet<TUser> TUsers { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -33,40 +33,28 @@ namespace Study.VS2022.Model.AutoModels
             modelBuilder.UseCollation("utf8_general_ci")
                 .HasCharSet("utf8");
 
-            modelBuilder.Entity<Torder>(entity =>
+            modelBuilder.Entity<TOrder>(entity =>
             {
-                entity.HasKey(e => e.ToGuid)
+                entity.HasKey(e => e.TO_GUID)
                     .HasName("PRIMARY");
 
                 entity.ToTable("TOrder");
 
-                entity.Property(e => e.ToGuid).HasColumnName("TO_GUID");
-
-                entity.Property(e => e.ToPrice)
-                    .HasColumnType("int(11)")
-                    .HasColumnName("TO_Price");
+                entity.Property(e => e.TO_Price).HasColumnType("int(11)");
             });
 
-            modelBuilder.Entity<Tuser>(entity =>
+            modelBuilder.Entity<TUser>(entity =>
             {
-                entity.HasKey(e => e.TuGuid)
+                entity.HasKey(e => e.TU_GUID)
                     .HasName("PRIMARY");
 
                 entity.ToTable("TUser");
 
-                entity.Property(e => e.TuGuid).HasColumnName("TU_GUID");
+                entity.Property(e => e.TU_Account).HasMaxLength(20);
 
-                entity.Property(e => e.TuAccount)
-                    .HasMaxLength(20)
-                    .HasColumnName("TU_Account");
+                entity.Property(e => e.TU_Password).HasMaxLength(255);
 
-                entity.Property(e => e.TuPassword)
-                    .HasMaxLength(255)
-                    .HasColumnName("TU_Password");
-
-                entity.Property(e => e.TuRealName)
-                    .HasMaxLength(255)
-                    .HasColumnName("TU_RealName");
+                entity.Property(e => e.TU_RealName).HasMaxLength(255);
             });
 
             OnModelCreatingPartial(modelBuilder);
