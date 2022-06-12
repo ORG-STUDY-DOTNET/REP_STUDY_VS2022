@@ -20,7 +20,7 @@
 ## git push 前的操作（单个仓储的一次性操作）
 1. git remote set-url origin https://???_????????????????????????????????????@github.com/ORG-STUDY-DOTNET/REP_STUDY_VS2022.git
 
-# .net core 版项目代码搭建
+# .net core 版 model 项目代码搭建（MySQL版）
 
 ## 1. 安装 VS2022
 ```
@@ -95,3 +95,13 @@ dotnet ef dbcontext scaffold "server=localhost;uid=root;pwd=???;port=3306;databa
 添加  --use-database-names：
 dotnet ef dbcontext scaffold "server=localhost;uid=root;pwd=???;port=3306;database=studyvs2022;" "Pomelo.EntityFrameworkCore.MySql" --use-database-names -c TestContext -o AutoModels -f
 ```
+
+# .net core 版 model 项目代码搭建（非 MySQL 版）
+## 1. 下载并安装工具：（关键字：EF Core Power Tools，也可以在阿里云盘上搜索：EF Core Power Tools v2.5.1005）
+## 2. 打开 VS2022，项目上右键，EF Core 工具，反向工程
+## 3. 点击添加，输入数据库信息，左下角保持 EF Core 6，一路点击确定，直到出现选表的界面
+## 4. 选择表，点击确定
+## 5. 四个地方都输入名称：EFCorePowerTools
+## 6. 勾选：使用数据库中的表名和列名、在项目中安装 EF Core 包
+## 7. 直接点击确定
+## 8. 生成解决方案测试
