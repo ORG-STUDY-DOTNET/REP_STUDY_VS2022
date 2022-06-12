@@ -39,7 +39,7 @@
 2. 使用 mysqld --skip-grant-tables 命令临时启动 mysql 服务，之后会阻塞这个窗口。
 3. 使用普通身份启动 cmd，输入 mysql -u root
 4. 使用 update 语句修改密码：update mysql.user set authentication_string=password('???') where user='root';
-5. 关闭两个 cmd 窗口，再手动结束 mysqld 进程，确保 mysql 及 mysqld 进程全部结束。
+5. 关闭两个 cmd 窗口，再手动结束 mysqld 进程，确保 mysql 及 mysqld 进程全部结束。（普通cmd窗口可以直接关闭，对于管理员cmd窗口，可以直接停止mysqld 服务，自动解除阻塞）
 ```
 
 ## 5. 因为暂未启动 mysql 服务，这里顺便修改一下成为表名大小写敏感。
@@ -87,15 +87,4 @@ create table TOrder
 2. 在该文件夹内，使用以下命令生成实体：（注意密码）
 dotnet ef dbcontext scaffold "server=localhost;uid=root;pwd=???;port=3306;database=studyvs2022;" "Pomelo.EntityFrameworkCore.MySql" -c TestContext -o AutoModels -f
 错误：这里提示：The framework 'Microsoft.NETCore.App', version '2.0.0' (x64) was not found.
-（安装了 dotnet tool install --global dotnet-ef --version 2.0.0，又编译了一下解决方案，再执行，可以了）
-```
-
-## 9. 清理解决方案，重试：
-```
-1. 删除 AutoModels 文件夹
-2. 清理解决方案
-3. 删除 dotnet-ef 工具：dotnet tool uninstall --global dotnet-ef
-4. 安装：dotnet tool install --global dotnet-ef
-5. 再安装，看有什么提示：dotnet tool install --global dotnet-ef（提示红字，说明那一步没有操作成功，也就是之前并未安装 2.0.0 版本的 dotnet-ef 工具）
-6. 这次一次成功了，可能是和之前重新生成解决方案时有影响
-```
+（这里生成一下解决方案，再执行就可以了）
