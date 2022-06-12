@@ -31,3 +31,71 @@
 ```
 (见 https://github.com/ORG-STUDY-MYSQL/REP_STUDY_MYSQL5731/blob/main/001_%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E6%AD%A5%E9%AA%A4.md)
 ```
+## 3. 移除不需要的项目及其文件，仅保留sln
+
+## 4. 设定 mysql 数据库的 root 密码
+```
+1. 管理员启动 cmd，输入：net stop mysql
+2. 使用 mysqld --skip-grant-tables 命令临时启动 mysql 服务，之后会阻塞这个窗口。
+3. 使用普通身份启动 cmd，输入 mysql -u root
+4. 使用 update 语句修改密码：update mysql.user set authentication_string=password('???') where user='root';
+5. 关闭两个 cmd 窗口，再手动结束 mysqld 进程，确保 mysql 及 mysqld 进程全部结束。
+```
+
+## 5. 因为暂未启动 mysql 服务，这里顺便修改一下成为表名大小写敏感。
+```
+1. 打开 my.ini 文件
+2. 在最后添加两行内容：
+character_set_server=utf8
+lower_case_table_names=2
+3. 删除服务：sc delete MySQL
+4. 安装服务：mysqld --install MySQL --defaults-file="C:\Program Files\mysql-5.7.19-winx64\my.ini"
+5. 在“服务”中，右键启动 MySQL 看是否成功
+```
+
+## 6. 创建库和表（这里使用普通身份登录 mysql）
+```
+1. create database studyvs2022 character set utf8 collate utf8_general_ci;
+2. use studyvs2022;
+3. 表：TUser
+create table TUser
+(
+	TU_GUID char(36)   primary key,
+	TU_Account varchar(20)		null,
+	TU_Password varchar(255)   null,
+	TU_RealName varchar(255)   null
+);
+4. 表 TOrder
+create table TOrder
+(
+	TO_GUID char(36)  primary key,
+	TO_Price int null
+);
+```
+
+## 7. 在解决方案中创建类库（.net 6.0 版）
+```
+1. 名称为：Study.VS2022.Model
+2. 删除不需要的类
+3. 从 Nuget 中安装：Pomelo.EntityFrameworkCore.MySql 6.0.1
+4. 从 Nuget 中安装：Microsoft.EntityFrameworkCore.Design 6.0.5
+```
+
+## 8. 根据表，生成实体：
+```
+1. 进入 Model 项目的文件夹，安装 dotnet-ef 工具： dotnet tool install --global dotnet-ef
+2. 在该文件夹内，使用以下命令生成实体：（注意密码）
+dotnet ef dbcontext scaffold "server=localhost;uid=root;pwd=???;port=3306;database=studyvs2022;" "Pomelo.EntityFrameworkCore.MySql" -c TestContext -o AutoModels -f
+错误：这里提示：The framework 'Microsoft.NETCore.App', version '2.0.0' (x64) was not found.
+（安装了 dotnet tool install --global dotnet-ef --version 2.0.0，又编译了一下解决方案，再执行，可以了）
+```
+
+## 9. 清理解决方案，重试：
+```
+1. 删除 AutoModels 文件夹
+2. 清理解决方案
+3. 删除 dotnet-ef 工具：dotnet tool uninstall --global dotnet-ef
+4. 安装：dotnet tool install --global dotnet-ef
+5. 再安装，看有什么提示：dotnet tool install --global dotnet-ef（提示红字，说明那一步没有操作成功，也就是之前并未安装 2.0.0 版本的 dotnet-ef 工具）
+6. 这次一次成功了，可能是和之前重新生成解决方案时有影响
+```
