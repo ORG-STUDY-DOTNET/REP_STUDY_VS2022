@@ -105,3 +105,9 @@ dotnet ef dbcontext scaffold "server=localhost;uid=root;pwd=???;port=3306;databa
 ## 6. 勾选：使用数据库中的表名和列名、在项目中安装 EF Core 包
 ## 7. 直接点击确定
 ## 8. 生成解决方案测试
+
+## 针对 Oracle
+```
+1. 只能使用添加 ad hoc 连接
+2. 可以查看一下 tnanames.ora 文件，查看一下 DataSource = （）小括号里面填写什么
+```
