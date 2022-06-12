@@ -1,4 +1,5 @@
 # 关于使用 VS2022 打开 VS2012 项目的问题
+
 ```
 1. 最终可以打开并编译运行代码，也可以运行 T4 模板，但是需要手动逐个项目安装：
 	1. Install-Package Microsoft.NETFramework.ReferenceAssemblies.net45 -Version 1.0.2
@@ -7,10 +8,8 @@
 3. 最终可以运行，但是仍需要一个针对 VS2022 的优化版
 ```
 
-# REP_STUDY_VS2022
-始于刚开始安装 vs2022 后的BS项目创建测试
+# 关于 github 不再支持使用密码 push 的处理方案：
 
-# git push 后输入密码不再能 push上来，需要使用 token，以下为操作步骤：
 ## github 上的设置
 1. 进入 Settings  Developer settings
 2. 点击  Generate a personal access token
