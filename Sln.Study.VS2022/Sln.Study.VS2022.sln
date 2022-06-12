@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32516.85
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Study.VS2022.Model", "Study.VS2022.Model\Study.VS2022.Model.csproj", "{1BF03C67-6B74-412D-89A8-D7ED163F4EEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Study.VS2022.Model", "Study.VS2022.Model\Study.VS2022.Model.csproj", "{1BF03C67-6B74-412D-89A8-D7ED163F4EEE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Study.VS2022.Model.MSSQLServer", "Study.VS2022.Model.MSSQLServer\Study.VS2022.Model.MSSQLServer.csproj", "{EF0B9899-7320-4A6F-8BD4-53E7B3AA6493}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Study.VS2022.Model.MSSQLServer", "Study.VS2022.Model.MSSQLServer\Study.VS2022.Model.MSSQLServer.csproj", "{EF0B9899-7320-4A6F-8BD4-53E7B3AA6493}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Study.VS2022.Model.Oracle", "Study.VS2022.Model.Oracle\Study.VS2022.Model.Oracle.csproj", "{989972B8-B25B-44A4-B1A0-56420845B791}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{EF0B9899-7320-4A6F-8BD4-53E7B3AA6493}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF0B9899-7320-4A6F-8BD4-53E7B3AA6493}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF0B9899-7320-4A6F-8BD4-53E7B3AA6493}.Release|Any CPU.Build.0 = Release|Any CPU
+		{989972B8-B25B-44A4-B1A0-56420845B791}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{989972B8-B25B-44A4-B1A0-56420845B791}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{989972B8-B25B-44A4-B1A0-56420845B791}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{989972B8-B25B-44A4-B1A0-56420845B791}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
