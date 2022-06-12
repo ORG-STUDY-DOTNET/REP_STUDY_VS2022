@@ -26,3 +26,8 @@
 ```
 选择 Asp.net Web 那一项进行安装，其它无需选择
 ```
+
+## 2. 本地部署 MySQL 
+```
+(见 https://github.com/ORG-STUDY-MYSQL/REP_STUDY_MYSQL5731/blob/main/001_%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E6%AD%A5%E9%AA%A4.md)
+```
