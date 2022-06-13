@@ -25,12 +25,12 @@ namespace Study.VS2022.Web.Controllers
             // VS2022 会出现 BUG，即明明添加了引用，但是无法编译通过，重启 VS2022 即可
             ITOrderService orderService = new TOrderService();
             TOrder to = new TOrder();
-            to.TO_Price = 1652;
+            to.TO_Price = 2033;
             to.TO_GUID = Guid.NewGuid().ToString();
             orderService.Add(to);
 
             // 不建议这样用
-            orderService.SaveChanges();
+            int sr = orderService.SaveChanges();
             return null;
         }
 
