@@ -16,8 +16,8 @@ namespace Study.VS2022.Model.AutoModels
         {
         }
 
-        public virtual DbSet<TOrder> TOrders { get; set; } = null!;
-        public virtual DbSet<TUser> TUsers { get; set; } = null!;
+        public virtual DbSet<TOrder> TOrders { get; set; }
+        public virtual DbSet<TUser> TUsers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -40,6 +40,8 @@ namespace Study.VS2022.Model.AutoModels
 
                 entity.ToTable("TOrder");
 
+                entity.Property(e => e.TO_GUID).HasMaxLength(50);
+
                 entity.Property(e => e.TO_Price).HasColumnType("int(11)");
             });
 
@@ -49,6 +51,8 @@ namespace Study.VS2022.Model.AutoModels
                     .HasName("PRIMARY");
 
                 entity.ToTable("TUser");
+
+                entity.Property(e => e.TU_GUID).HasMaxLength(50);
 
                 entity.Property(e => e.TU_Account).HasMaxLength(20);
 
