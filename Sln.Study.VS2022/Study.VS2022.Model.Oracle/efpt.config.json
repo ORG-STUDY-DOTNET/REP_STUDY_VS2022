@@ -1,28 +1,28 @@
 ﻿{
    "CodeGenerationMode": 2,
-   "ContextClassName": "OraContext",
-   "ContextNamespace": "OraModels",
+   "ContextClassName": "CaseContext",
+   "ContextNamespace": "CaseDemo",
    "DefaultDacpacSchema": null,
    "FilterSchemas": false,
-   "IncludeConnectionString": false,
-   "ModelNamespace": "OraModels",
-   "OutputContextPath": "OraModels",
-   "OutputPath": "OraModels",
+   "IncludeConnectionString": true,
+   "ModelNamespace": "CaseDemo",
+   "OutputContextPath": "CaseDemo",
+   "OutputPath": "CaseDemo",
    "ProjectRootNamespace": "Study.VS2022.Model.Oracle",
    "Schemas": null,
    "SelectedHandlebarsLanguage": 0,
    "SelectedToBeGenerated": 0,
    "Tables": [
       {
-         "Name": "SYSTEM.TORDER",
+         "Name": "SYSTEM.TOrder",
          "ObjectType": 0
       },
       {
-         "Name": "SYSTEM.TUSER",
+         "Name": "SYSTEM.TUser",
          "ObjectType": 0
       }
    ],
-   "UiHint": "2",
+   "UiHint": "12",
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": true,
    "UseDbContextSplitting": false,

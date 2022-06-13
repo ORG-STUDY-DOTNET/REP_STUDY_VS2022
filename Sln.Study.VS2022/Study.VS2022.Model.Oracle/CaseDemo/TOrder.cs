@@ -3,11 +3,11 @@
 using System;
 using System.Collections.Generic;
 
-namespace Study.VS2022.Model.Oracle.OraModels
+namespace Study.VS2022.Model.Oracle.CaseDemo
 {
-    public partial class TORDER
+    public partial class TOrder
     {
-        public string TO_GUID { get; set; }
-        public decimal? TO_PRICE { get; set; }
+        public string TO_Guid { get; set; }
+        public decimal? TO_Price { get; set; }
     }
 }

@@ -5,55 +5,64 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Study.VS2022.Model.Oracle.OraModels
+namespace Study.VS2022.Model.Oracle.CaseDemo
 {
-    public partial class OraContext : DbContext
+    public partial class CaseContext : DbContext
     {
-        public OraContext()
+        public CaseContext()
         {
         }
 
-        public OraContext(DbContextOptions<OraContext> options)
+        public CaseContext(DbContextOptions<CaseContext> options)
             : base(options)
         {
         }
 
-        public virtual DbSet<TORDER> TORDER { get; set; }
-        public virtual DbSet<TUSER> TUSER { get; set; }
+        public virtual DbSet<TOrder> TOrder { get; set; }
+        public virtual DbSet<TUser> TUser { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseOracle("Data Source=(DESCRIPTION =    (ADDRESS_LIST =      (ADDRESS = (PROTOCOL = TCP)(HOST = localhost)(PORT = 1521))    )    (CONNECT_DATA =      (SERVICE_NAME = orcl)    ));User Id=system;Password=system;");
+            }
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<TORDER>(entity =>
+            modelBuilder.Entity<TOrder>(entity =>
             {
-                entity.HasKey(e => e.TO_GUID)
-                    .HasName("SYS_C0011100");
+                entity.HasNoKey();
 
-                entity.Property(e => e.TO_GUID)
+                entity.Property(e => e.TO_Guid)
+                    .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.TO_PRICE).HasColumnType("NUMBER");
+                entity.Property(e => e.TO_Price).HasColumnType("NUMBER");
             });
 
-            modelBuilder.Entity<TUSER>(entity =>
+            modelBuilder.Entity<TUser>(entity =>
             {
-                entity.HasKey(e => e.TU_GUID)
-                    .HasName("SYS_C0011099");
+                entity.HasNoKey();
 
-                entity.Property(e => e.TU_GUID)
+                entity.Property(e => e.TU_Account)
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TU_Guid)
+                    .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.TU_ACCOUNT)
-                    .HasMaxLength(20)
+                entity.Property(e => e.TU_Password)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
 
-                entity.Property(e => e.TU_PASSWORD)
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.TU_REALNAME)
-                    .HasMaxLength(255)
+                entity.Property(e => e.TU_RealName)
+                    .HasMaxLength(200)
                     .IsUnicode(false);
             });
 
