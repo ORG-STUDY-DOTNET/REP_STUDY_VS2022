@@ -42,6 +42,7 @@ using Study.VS2022.Model.MSSQLServer;
 using Study.VS2022.Model.Oracle;
 using Study.VS2022.IDAL;
 using Study.VS2022.DAL;
+using Microsoft.EntityFrameworkCore;
 
 // 看情况添加
 using Study.VS2022.Model.AutoModels;
@@ -77,6 +78,22 @@ for (int i = 0; i < lines.Length; i++)
 <#}
 #><#}
 // //循环的写法 写各表！#>
-		int SaveChanges();
+
+		/// <summary>
+		/// 推荐使用
+		/// </summary>
+		/// <typeparam name="T">表对应的实体类型</typeparam>
+		/// <returns>返回用于在某次会话中，针对某张表的 Set </returns>
+		public DbSet<T> GetSet<T>()
+			where T: class, new()
+		{
+			return EFDbContextFactory.GetCurrentDbContext().Set<T>();
+		}
+
+		public int SaveChanges()
+		{
+			DbContext ctx = EFDbContextFactory.GetCurrentDbContext();
+			return ctx.SaveChanges();
+		}
 	}
 }
