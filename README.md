@@ -109,5 +109,7 @@ dotnet ef dbcontext scaffold "server=localhost;uid=root;pwd=???;port=3306;databa
 ## 针对 Oracle
 ```
 1. 只能使用添加 ad hoc 连接
-2. 可以查看一下 tnanames.ora 文件，查看一下 DataSource = （）小括号里面填写什么
+2. 可以查看一下 tnanames.ora 文件，查看一下 DataSource = （）小括号里面填写什么，例：
+Data Source=(DESCRIPTION =    (ADDRESS_LIST =      (ADDRESS = (PROTOCOL = TCP)(HOST = localhost)(PORT = 1521))    )    (CONNECT_DATA =      (SERVICE_NAME = orcl)    ));User Id=system;Password=system;
+3. 注意，可以使用双引号编写 Oracle 的创建表的 SQL 语句，这样，在 EF Core 工具中再选中“使用数据库中的表名及列名”，就可以保证大小写一致了
 ```
