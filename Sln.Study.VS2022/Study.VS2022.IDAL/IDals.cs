@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Study.VS2022.Model;
-using Study.VS2022.Model.MSSQLServer;
-using Study.VS2022.Model.Oracle;
 
 // 看情况添加
 using Study.VS2022.Model.AutoModels;

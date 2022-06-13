@@ -21,8 +21,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Study.VS2022.Common\Study.VS2022.Common.csproj" />
     <ProjectReference Include="..\Study.VS2022.IDAL\Study.VS2022.IDAL.csproj" />
-    <ProjectReference Include="..\Study.VS2022.Model.MSSQLServer\Study.VS2022.Model.MSSQLServer.csproj" />
-    <ProjectReference Include="..\Study.VS2022.Model.Oracle\Study.VS2022.Model.Oracle.csproj" />
     <ProjectReference Include="..\Study.VS2022.Model\Study.VS2022.Model.csproj" />
   </ItemGroup>
 

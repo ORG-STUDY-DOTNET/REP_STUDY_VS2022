@@ -18,8 +18,6 @@
     <ProjectReference Include="..\Study.VS2022.DALFactory\Study.VS2022.DALFactory.csproj" />
     <ProjectReference Include="..\Study.VS2022.IBLL\Study.VS2022.IBLL.csproj" />
     <ProjectReference Include="..\Study.VS2022.IDAL\Study.VS2022.IDAL.csproj" />
-    <ProjectReference Include="..\Study.VS2022.Model.MSSQLServer\Study.VS2022.Model.MSSQLServer.csproj" />
-    <ProjectReference Include="..\Study.VS2022.Model.Oracle\Study.VS2022.Model.Oracle.csproj" />
     <ProjectReference Include="..\Study.VS2022.Model\Study.VS2022.Model.csproj" />
   </ItemGroup>
 

@@ -38,8 +38,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Study.VS2022.Model;
-using Study.VS2022.Model.MSSQLServer;
-using Study.VS2022.Model.Oracle;
 using Study.VS2022.IBLL;
 
 // 看情况添加
@@ -59,7 +57,7 @@ for (int i = 0; i < lines.Length; i++)
 		lines[i] = lines[i].Substring(startIndex + 1, length);
 		string className = lines[i];#>
 
-	public partial class T<#=className#>Service : BaseService<<#=className#>>, I<#=className#>Service
+	public partial class <#=className#>Service : BaseService<<#=className#>>, I<#=className#>Service
 	{
 		public override void SetCurrentDal()
 		{

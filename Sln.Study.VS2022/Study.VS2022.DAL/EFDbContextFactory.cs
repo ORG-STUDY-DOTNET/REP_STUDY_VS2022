@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Study.VS2022.Common;
 using Study.VS2022.Model.AutoModels;
-using Study.VS2022.Model.MSSQLServer.EFCorePowerTools;
-using Study.VS2022.Model.Oracle.CaseDemo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,9 +20,9 @@ namespace Study.VS2022.DAL
             {
                 // 需要引用不同的 Model 项目
                 // -------------------------
-                //db = new TestContext();
+                db = new TestContext();
                 //db = new StudyVS2022Context();
-                db = new CaseContext();
+                //db = new CaseContext();
 
                 DotNetCoreCallContext.SetData("DbContext", db);
             }

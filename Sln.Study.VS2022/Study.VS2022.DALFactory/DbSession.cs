@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Study.VS2022.Model;
-using Study.VS2022.Model.MSSQLServer;
-using Study.VS2022.Model.Oracle;
 using Study.VS2022.IDAL;
 using Study.VS2022.DAL;
 using Microsoft.EntityFrameworkCore;
