@@ -6,4 +6,40 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="BLLs.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BLLs.tt</DependentUpon>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Study.VS2022.DALFactory\Study.VS2022.DALFactory.csproj" />
+    <ProjectReference Include="..\Study.VS2022.IBLL\Study.VS2022.IBLL.csproj" />
+    <ProjectReference Include="..\Study.VS2022.IDAL\Study.VS2022.IDAL.csproj" />
+    <ProjectReference Include="..\Study.VS2022.Model.MSSQLServer\Study.VS2022.Model.MSSQLServer.csproj" />
+    <ProjectReference Include="..\Study.VS2022.Model.Oracle\Study.VS2022.Model.Oracle.csproj" />
+    <ProjectReference Include="..\Study.VS2022.Model\Study.VS2022.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="BLLs.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>BLLs.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="BLLs.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BLLs.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
 </Project>

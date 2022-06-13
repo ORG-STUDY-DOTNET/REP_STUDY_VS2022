@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Study.VS2022.IDAL
+namespace Study.VS2022.IBLL
 {
-    public interface IBaseDal<T>
+    public interface IBaseService<T>
         where T : class, new()
     {
         T Add(T entity);
+        int SaveChanges();
     }
 }

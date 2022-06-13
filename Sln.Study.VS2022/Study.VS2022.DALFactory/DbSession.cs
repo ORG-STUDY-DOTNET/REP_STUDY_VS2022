@@ -42,18 +42,6 @@ namespace Study.VS2022.DALFactory
 				return _TUserDal;
 			}
 		}
-
-		/// <summary>
-		/// 推荐使用
-		/// </summary>
-		/// <typeparam name="T">表对应的实体类型</typeparam>
-		/// <returns>返回用于在某次会话中，针对某张表的 Set </returns>
-		public DbSet<T> GetSet<T>()
-			where T: class, new()
-		{
-			return EFDbContextFactory.GetCurrentDbContext().Set<T>();
-		}
-
 		public int SaveChanges()
 		{
 			DbContext ctx = EFDbContextFactory.GetCurrentDbContext();
