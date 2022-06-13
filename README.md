@@ -60,7 +60,7 @@ lower_case_table_names=2
 3. 表：TUser
 create table TUser
 (
-	TU_GUID char(36)   primary key,
+	TU_GUID varchar(50)   primary key,
 	TU_Account varchar(20)		null,
 	TU_Password varchar(255)   null,
 	TU_RealName varchar(255)   null
@@ -68,7 +68,7 @@ create table TUser
 4. 表 TOrder
 create table TOrder
 (
-	TO_GUID char(36)  primary key,
+	TO_GUID varchar(50)  primary key,
 	TO_Price int null
 );
 ```
