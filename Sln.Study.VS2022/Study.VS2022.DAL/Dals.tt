@@ -1,0 +1,65 @@
+﻿﻿<# 
+// 由一对儿 ＜＃＃＞内部编写t4模板层面的C#代码，可以添加注释，在生成的文件中不可见
+// hostspecific 改为 true!，通过 Path.Combine(Host.ResolvePath(""), "edmx File Name") 拿路径
+#>
+<#@ template debug="false" hostspecific="true" language="C#" #>
+<# 
+// 这里指定了输出文件的扩展名
+#>
+<#@ output extension=".cs" #>
+<#
+// 下文为引用某一个程序集
+#>
+<#@ assembly name="System.Data.dll" #>
+<# 
+// 下文为引入命名空间 System.IO，可以直接使用 File 了
+#>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Text.RegularExpressions" #>
+<# 
+
+// edmx 名称：
+string edmxName = "TestContext.cs";
+// 命名空间前缀：
+string preSpaceName = "IsTypeOf(Study.VS2012Model.";
+
+// 测试使用 File 类，这里报：无法声明静态类型 System.IO.File 的变量
+//const File f1 = null;
+
+// 读取 edmx
+// <EntityType Name="TOrder">
+// 从上面的内容中拿表名！
+string[] lines = File.ReadAllLines(Path.Combine(Host.ResolvePath(""), "../Study.VS2022.Model/AutoModels/" + edmxName));
+
+// 参考正则：//string res = Regex.Replace("ab123dc", @"ab(\d+)dc", "$1"); 《#=lines[i]#》 using System.Text.RegularExpressions;
+
+#>using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Study.VS2022.Model;
+using Study.VS2022.Model.MSSQLServer;
+using Study.VS2022.Model.Oracle;
+using Study.VS2022.IDAL;
+// 第7步:添加 Dals.tt,添加时,要用文本文件为基础
+
+namespace Study.VS2022.DAL
+{<# // 循环的写法 写各表！
+for (int i = 0; i < lines.Length; i++)
+{#><#if (lines[i].Contains(" public virtual DbSet<"))
+	{
+		lines[i] = lines[i].Trim();
+		// public virtual DbSet<TOrder> TOrders { get; set; }
+		int startIndex = lines[i].IndexOf("<");
+		int endIndex = lines[i].IndexOf(">");
+		int length = endIndex - startIndex - 1;
+		lines[i] = lines[i].Substring(startIndex + 1, length);
+		string className = lines[i];#>
+
+	//public partial class <#=className#>Dal : BaseDal<<#=className#>>, I<#=className#>Dal
+	//{
+	//}
+<#}
+#><#}
+// //循环的写法 写各表！#>
+}

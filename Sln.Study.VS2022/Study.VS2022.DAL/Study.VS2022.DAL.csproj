@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -7,14 +7,42 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="Dals.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Dals.tt</DependentUpon>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.5" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Study.VS2022.Common\Study.VS2022.Common.csproj" />
+    <ProjectReference Include="..\Study.VS2022.IDAL\Study.VS2022.IDAL.csproj" />
     <ProjectReference Include="..\Study.VS2022.Model.MSSQLServer\Study.VS2022.Model.MSSQLServer.csproj" />
     <ProjectReference Include="..\Study.VS2022.Model.Oracle\Study.VS2022.Model.Oracle.csproj" />
     <ProjectReference Include="..\Study.VS2022.Model\Study.VS2022.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Dals.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Dals.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Dals.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Dals.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>
