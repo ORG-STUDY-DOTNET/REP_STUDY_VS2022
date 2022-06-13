@@ -12,6 +12,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>IDals.tt</DependentUpon>
     </None>
+    <None Include="IDbSession.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>IDbSession.tt</DependentUpon>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +30,10 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>IDals.cs</LastGenOutput>
     </None>
+    <None Update="IDbSession.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IDbSession.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
@@ -36,6 +45,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>IDals.tt</DependentUpon>
+    </Compile>
+    <Compile Update="IDbSession.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>IDbSession.tt</DependentUpon>
     </Compile>
   </ItemGroup>
 
