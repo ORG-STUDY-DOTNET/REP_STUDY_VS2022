@@ -60,7 +60,7 @@ lower_case_table_names=2
 3. 表：TUser
 create table TUser
 (
-	TU_GUID char(36)   primary key,
+	TU_GUID varchar(50)   primary key,
 	TU_Account varchar(20)		null,
 	TU_Password varchar(255)   null,
 	TU_RealName varchar(255)   null
@@ -68,7 +68,7 @@ create table TUser
 4. 表 TOrder
 create table TOrder
 (
-	TO_GUID char(36)  primary key,
+	TO_GUID varchar(50)  primary key,
 	TO_Price int null
 );
 ```
@@ -96,6 +96,11 @@ dotnet ef dbcontext scaffold "server=localhost;uid=root;pwd=???;port=3306;databa
 dotnet ef dbcontext scaffold "server=localhost;uid=root;pwd=???;port=3306;database=studyvs2022;" "Pomelo.EntityFrameworkCore.MySql" --use-database-names -c TestContext -o AutoModels -f
 ```
 
+## 10. 禁用引用类型的可空类型
+```
+在项目属性的“生成-常规”中修改，禁用“可为 Null 的类型”
+```
+
 # .net core 版 model 项目代码搭建（非 MySQL 版）
 ## 1. 下载并安装工具：（关键字：EF Core Power Tools，也可以在阿里云盘上搜索：EF Core Power Tools v2.5.1005）
 ## 2. 打开 VS2022，项目上右键，EF Core 工具，反向工程
@@ -111,5 +116,5 @@ dotnet ef dbcontext scaffold "server=localhost;uid=root;pwd=???;port=3306;databa
 1. 只能使用添加 ad hoc 连接
 2. 可以查看一下 tnanames.ora 文件，查看一下 DataSource = （）小括号里面填写什么，例：
 Data Source=(DESCRIPTION =    (ADDRESS_LIST =      (ADDRESS = (PROTOCOL = TCP)(HOST = localhost)(PORT = 1521))    )    (CONNECT_DATA =      (SERVICE_NAME = orcl)    ));User Id=system;Password=system;
-3. 注意，可以使用双引号编写 Oracle 的创建表的 SQL 语句，这样，在 EF Core 工具中再选中“使用数据库中的表名及列名”，就可以保证大小写一致了
+3. 注意，可以使用双引号编写 Oracle 的创建表的 SQL 语句，这样，在 EF Core 工具中再选中“使用数据库中的表名及列名”，就可以保证大小写一致了！
 ```
