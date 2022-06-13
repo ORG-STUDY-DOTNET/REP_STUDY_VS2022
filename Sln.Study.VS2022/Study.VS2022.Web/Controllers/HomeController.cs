@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Autofac;
+using Microsoft.AspNetCore.Mvc;
 using Study.VS2022.BLL;
 using Study.VS2022.IBLL;
 using Study.VS2022.Model.AutoModels;
@@ -23,7 +24,7 @@ namespace Study.VS2022.Web.Controllers
         public string TestAdd()
         {
             // VS2022 会出现 BUG，即明明添加了引用，但是无法编译通过，重启 VS2022 即可
-            ITOrderService orderService = new TOrderService();
+            ITOrderService orderService = Program.AutofacContainer.Resolve<ITOrderService>();
             TOrder to = new TOrder();
             to.TO_Price = 2033;
             to.TO_GUID = Guid.NewGuid().ToString();
