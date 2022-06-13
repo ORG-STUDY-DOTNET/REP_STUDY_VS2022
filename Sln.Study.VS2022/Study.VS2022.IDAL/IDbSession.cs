@@ -14,9 +14,9 @@ namespace Study.VS2022.IDAL
 {
 	public partial interface IDbSession
 	{
-		ITOrderDal TOrderDal { get; set; }
+		ITOrderDal TOrderDal { get; }
 
-		ITUserDal TUserDal { get; set; }
+		ITUserDal TUserDal { get; }
 		int SaveChanges();
 	}
 }

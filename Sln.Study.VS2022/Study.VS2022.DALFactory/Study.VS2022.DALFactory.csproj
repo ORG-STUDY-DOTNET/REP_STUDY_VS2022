@@ -6,4 +6,37 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="DbSession.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DbSession.tt</DependentUpon>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Study.VS2022.DAL\Study.VS2022.DAL.csproj" />
+    <ProjectReference Include="..\Study.VS2022.IDAL\Study.VS2022.IDAL.csproj" />
+    <ProjectReference Include="..\Study.VS2022.Model\Study.VS2022.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="DbSession.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DbSession.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="DbSession.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DbSession.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
 </Project>
