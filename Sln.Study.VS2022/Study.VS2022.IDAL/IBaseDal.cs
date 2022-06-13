@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Study.VS2022.IDAL
 {
-    public interface IBaseDal
+    public interface IBaseDal<T>
+        where T : class, new()
     {
     }
 }

@@ -6,4 +6,37 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="IDals.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>IDals.tt</DependentUpon>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Study.VS2022.Model.MSSQLServer\Study.VS2022.Model.MSSQLServer.csproj" />
+    <ProjectReference Include="..\Study.VS2022.Model.Oracle\Study.VS2022.Model.Oracle.csproj" />
+    <ProjectReference Include="..\Study.VS2022.Model\Study.VS2022.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="IDals.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IDals.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="IDals.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>IDals.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
 </Project>

@@ -40,13 +40,12 @@ using System.Text;
 using Study.VS2022.Model;
 using Study.VS2022.Model.MSSQLServer;
 using Study.VS2022.Model.Oracle;
-using Study.VS2022.IDAL;
+
+// 看情况添加
+using Study.VS2022.Model.AutoModels;
 // 第7步:添加 Dals.tt,添加时,要用文本文件为基础
 
-//
-using Study.VS2022.Model.AutoModels;
-
-namespace Study.VS2022.DAL
+namespace Study.VS2022.IDAL
 {<# // 循环的写法 写各表！
 for (int i = 0; i < lines.Length; i++)
 {#><#if (lines[i].Contains(" public virtual DbSet<"))
@@ -59,7 +58,7 @@ for (int i = 0; i < lines.Length; i++)
 		lines[i] = lines[i].Substring(startIndex + 1, length);
 		string className = lines[i];#>
 
-	public partial class <#=className#>Dal : BaseDal<<#=className#>>, I<#=className#>Dal
+	public partial interface I<#=className#>Dal : IBaseDal<<#=className#>>
 	{
 	}
 <#}
