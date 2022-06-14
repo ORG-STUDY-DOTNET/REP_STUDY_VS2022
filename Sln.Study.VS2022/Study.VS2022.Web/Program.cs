@@ -31,7 +31,11 @@ namespace Study.VS2022.Web
             ContainerBuilder ctnBuilder = new ContainerBuilder();
             Assembly assembly = Assembly.Load("Study.VS2022.BLL");
             ctnBuilder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces().InstancePerDependency();
-            Program.AutofacContainer = ctnBuilder.Build(); 
+            Program.AutofacContainer = ctnBuilder.Build();
+            #endregion
+
+            #region Log4Net
+            builder.Logging.AddLog4Net("Configures/log4net.config");
             #endregion
 
             var app = builder.Build();
