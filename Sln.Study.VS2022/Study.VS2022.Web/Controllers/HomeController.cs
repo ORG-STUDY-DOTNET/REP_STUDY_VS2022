@@ -23,6 +23,9 @@ namespace Study.VS2022.Web.Controllers
         /// <returns>测试返回情况</returns>
         public string TestAdd()
         {
+            // 日志测试
+            _logger.LogInformation("TestAdd logs");
+
             // VS2022 会出现 BUG，即明明添加了引用，但是无法编译通过，重启 VS2022 即可
             ITOrderService orderService = Program.AutofacContainer.Resolve<ITOrderService>();
             TOrder to = new TOrder();
@@ -33,6 +36,14 @@ namespace Study.VS2022.Web.Controllers
             // 不建议这样用
             int sr = orderService.SaveChanges();
             return null;
+
+            // TODO:
+            /*
+             Swagger    WebAPI 项目自带 Swagger!
+            大文件上传
+            大量数据插入方案
+            日志 ！
+             */
         }
 
         public IActionResult Index()
