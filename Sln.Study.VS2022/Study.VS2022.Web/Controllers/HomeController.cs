@@ -34,8 +34,13 @@ namespace Study.VS2022.Web.Controllers
             #endregion
 
             // 日志测试
-            _logger.LogDebug("Debug infos 232");
-            _logger.LogInformation("TestAdd logs, this is LogInformation!");
+            // ALL|DEBUG|INFO|WARN|ERROR|FATAL|OFF
+            _logger.LogDebug("TestAdd Debug!");
+            _logger.LogInformation("TestAdd Information!");
+            _logger.LogWarning("Test Add Warning!");
+            _logger.LogTrace("Test Add Trace!");
+            _logger.LogError("Test Add Error!");
+            _logger.LogCritical("Test Add Critical!");
 
             // VS2022 会出现 BUG，即明明添加了引用，但是无法编译通过，重启 VS2022 即可
             ITOrderService orderService = Program.AutofacContainer.Resolve<ITOrderService>();
