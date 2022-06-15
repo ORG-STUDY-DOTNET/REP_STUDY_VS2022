@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Study.VS2022.Model</name>
+    </assembly>
+    <members>
+        <member name="T:Study.VS2022.Model.PostParam">
+            <summary>
+            页码参数
+            </summary>
+        </member>
+        <member name="P:Study.VS2022.Model.PostParam.PageSize">
+            <summary>
+            页面大小
+            </summary>
+        </member>
+        <member name="P:Study.VS2022.Model.PostParam.PageIndex">
+            <summary>
+            页码
+            </summary>
+        </member>
+    </members>
+</doc>
