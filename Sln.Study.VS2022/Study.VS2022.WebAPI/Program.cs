@@ -38,16 +38,16 @@ namespace Study.VS2022.WebAPI
             #endregion
 
             #region 跨域处理
-            builder.Services.AddCors(options =>
-            {
-                options.AddPolicy("AllowSpecificOrigin", bd =>
-                {
-                    bd.WithOrigins("http://localhost:5014")
-                        .AllowAnyMethod()
-                        .AllowAnyHeader()
-                        .AllowCredentials();
-                });
-            });
+            //builder.Services.AddCors(options =>         // ----> 这一项不影响大文件上传问题
+            //{
+            //    options.AddPolicy("AllowSpecificOrigin", bd =>
+            //    {
+            //        bd.WithOrigins("http://localhost:5014")
+            //            .AllowAnyMethod()
+            //            .AllowAnyHeader()
+            //            .AllowCredentials();
+            //    });
+            //});
             #endregion
 
             var app = builder.Build();
@@ -81,7 +81,7 @@ namespace Study.VS2022.WebAPI
             }
 
             // 允许跨域
-            app.UseCors("AllowSpecificOrigin");
+            //app.UseCors("AllowSpecificOrigin");     // ----> 这一项不影响大文件上传问题
 
             app.UseAuthorization();
 
