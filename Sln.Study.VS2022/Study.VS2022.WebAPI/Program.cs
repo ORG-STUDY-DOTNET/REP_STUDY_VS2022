@@ -37,6 +37,14 @@ namespace Study.VS2022.WebAPI
             });
             #endregion
 
+            #region ¿çÓò´¦Àí
+            builder.Services.AddCors(options => {
+                options.AddPolicy("AllowSpecificOrigin", bd => {
+                    bd.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials();
+                });               
+            });
+            #endregion
+
             var app = builder.Build();
 
             #region Area Router

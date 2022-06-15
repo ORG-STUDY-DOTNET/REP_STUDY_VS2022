@@ -42,5 +42,21 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
             });
             return jr;
         }
+
+        /// <summary>
+        /// 多文件上传
+        /// </summary>
+        /// <param name="files"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public JsonResult PostFiles(List<IFormFile> files)
+        {
+            JsonResult jr = new JsonResult(new
+            {
+                Ret = 1,
+                Msg = "OK"
+            });
+            return jr;
+        }
     }
 }
