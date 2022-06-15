@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Study.VS2022.WebAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]/[action]")] // 经过修改,添加 api 和 [action] 部分
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]

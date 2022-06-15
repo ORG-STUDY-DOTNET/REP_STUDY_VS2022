@@ -7,7 +7,7 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
     /// <summary>
     /// AH1 Controller
     /// </summary>
-    [Area("AR1")]
+    [Area("AR1")] // 添加 Area 和 Route 两个特性
     [Route("api/[area]/[controller]/[action]")]
     [ApiController]
     public class AH1Controller : ControllerBase

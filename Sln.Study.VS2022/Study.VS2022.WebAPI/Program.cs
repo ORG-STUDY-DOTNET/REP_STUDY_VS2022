@@ -17,6 +17,10 @@ namespace Study.VS2022.WebAPI
             //builder.Services.AddSwaggerGen();
 
             #region Swagger Model Xml
+            // 1. 注释掉上面的一句
+            // 2. 添加下面的内容, 其中 Model 项目的生成 xml 路径设置为: .\Study.VS2022.Model.xml,
+            // 并且设置为始终复制
+            // 3. 通过下面的修改,使 Swagger 中包含对 Model 中类型的说明
             builder.Services.AddSwaggerGen(c => 
             {
                 c.SwaggerDoc("v1", new OpenApiInfo() 
@@ -36,6 +40,8 @@ namespace Study.VS2022.WebAPI
             var app = builder.Build();
 
             #region Area Router
+            // 这里面不需要配置 Router
+
             // 加上这句,下面才不会报错
             //app.UseRouting();
             // 配置路由
