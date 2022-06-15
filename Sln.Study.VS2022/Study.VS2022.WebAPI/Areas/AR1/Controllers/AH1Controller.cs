@@ -43,13 +43,16 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
             return jr;
         }
 
+        // <param name="files">文件</param> List<IFormFile> files, 
+
         /// <summary>
-        /// 多文件上传
+        /// 单个 Query 参数与多文件上传(暂未处理大文件的上传)
         /// </summary>
-        /// <param name="files"></param>
+        /// <param name="id">附加参数</param>
+        /// <param name="files">其它数据参数</param>
         /// <returns></returns>
         [HttpPost]
-        public JsonResult PostFiles(List<IFormFile> files)
+        public JsonResult PostFiles([FromQuery]string id, IList<IFormFile> files)
         {
             JsonResult jr = new JsonResult(new
             {

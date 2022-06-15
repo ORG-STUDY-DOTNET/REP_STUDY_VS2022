@@ -20,5 +20,10 @@ namespace Study.VS2022.Model
         /// 页码
         /// </summary>
         public int PageIndex { get; set; }
+
+        ///// <summary>
+        ///// 文件
+        ///// </summary>
+        //public IFormFile File { get; set; }
     }
 }
