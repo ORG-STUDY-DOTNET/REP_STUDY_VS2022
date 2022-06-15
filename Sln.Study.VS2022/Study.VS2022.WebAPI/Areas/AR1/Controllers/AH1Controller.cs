@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Study.VS2022.Model;
 
@@ -7,6 +8,7 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
     /// <summary>
     /// AH1 Controller
     /// </summary>
+    [EnableCors("AllowSpecificOrigin")]
     [Area("AR1")] // 添加 Area 和 Route 两个特性
     [Route("api/[area]/[controller]/[action]")]
     [ApiController]
@@ -51,6 +53,8 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
         /// <param name="id">附加参数</param>
         /// <param name="files">其它数据参数</param>
         /// <returns></returns>
+        [RequestSizeLimit(525336576)]//501MB
+        [RequestFormLimits(MultipartBodyLengthLimit = 524288000)]//500MB, which is already too high
         [HttpPost]
         public JsonResult PostFiles([FromQuery]string id, IList<IFormFile> files)
         {

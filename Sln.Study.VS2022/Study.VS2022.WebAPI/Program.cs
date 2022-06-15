@@ -38,16 +38,16 @@ namespace Study.VS2022.WebAPI
             #endregion
 
             #region øÁ”Ú¥¶¿Ì
-            //builder.Services.AddCors(options =>
-            //{
-            //    options.AddPolicy("AllowSpecificOrigin", bd =>
-            //    {
-            //        bd.WithOrigins("http://localhost:5014")
-            //            .AllowAnyMethod()
-            //            .AllowAnyHeader()
-            //            .AllowCredentials();
-            //    });
-            //});
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigin", bd =>
+                {
+                    bd.WithOrigins("http://localhost:5014")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials();
+                });
+            });
             #endregion
 
             var app = builder.Build();
@@ -80,8 +80,8 @@ namespace Study.VS2022.WebAPI
                 app.UseSwaggerUI();
             }
 
-            //// ‘ –ÌøÁ”Ú
-            //app.UseCors();
+            // ‘ –ÌøÁ”Ú
+            app.UseCors("AllowSpecificOrigin");
 
             app.UseAuthorization();
 
