@@ -21,6 +21,24 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
         [HttpGet]
         public JsonResult GetByNoParam()
         {
+            #region 目前的代码报 CORS 错误
+            /*
+            // get 请求
+            function fget(url) {
+                fetch(url, {
+                    method: 'GET'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                })
+                .catch(error => {
+                    console.error(error)
+                })
+            }
+             */
+            #endregion
+
             JsonResult jr = new JsonResult(new 
             {
                 Ret = 1,
