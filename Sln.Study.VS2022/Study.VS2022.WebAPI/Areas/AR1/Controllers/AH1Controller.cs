@@ -59,7 +59,7 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
 
         //[RequestFormLimits(MultipartBodyLengthLimit = 524288000)]//500MB, which is already too high
         [HttpPost]
-        public JsonResult PostFiles([FromQuery]string id, IList<IFormFile> files)
+        public JsonResult PostFiles([FromQuery]string id, [FromForm]string f1, [FromForm] string f2, IList<IFormFile> files)
         {
             JsonResult jr = new JsonResult(new
             {
