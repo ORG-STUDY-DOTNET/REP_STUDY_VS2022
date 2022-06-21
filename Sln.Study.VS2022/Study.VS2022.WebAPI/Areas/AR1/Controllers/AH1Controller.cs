@@ -68,5 +68,29 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
             });
             return jr;
         }
+
+        /// <summary>
+        /// post 传递固定的多组 文件与 form
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="file1"></param>
+        /// <param name="f1"></param>
+        /// <param name="file2"></param>
+        /// <param name="f2"></param>
+        /// <returns></returns>
+        [DisableRequestSizeLimit]
+        [HttpPost]
+        public JsonResult PostFileAndForm([FromQuery] string id, IFormFile file1, [FromForm]string f1
+            , IFormFile file2, [FromForm] string f2)
+        {
+            JsonResult jr = new JsonResult(new
+            {
+                Ret = 1,
+                Msg = "OK"
+            });
+            return jr;
+        }
+
+
     }
 }
