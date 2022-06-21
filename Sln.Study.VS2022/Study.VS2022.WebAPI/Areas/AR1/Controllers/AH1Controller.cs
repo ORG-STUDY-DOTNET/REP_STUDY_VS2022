@@ -8,7 +8,8 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
     /// <summary>
     /// AH1 Controller
     /// </summary>
-    //[EnableCors("AllowSpecificOrigin")]   // ----> 这一项不影响大文件上传问题
+   
+
     [Area("AR1")] // 添加 Area 和 Route 两个特性
     [Route("api/[area]/[controller]/[action]")]
     [ApiController]
@@ -18,6 +19,7 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
         /// GetByNoParam
         /// </summary>
         /// <returns></returns>
+        //[EnableCors("AllowSpecificOrigin")]   // ----> 这一项不影响大文件上传问题
         [HttpGet]
         public JsonResult GetByNoParam()
         {
