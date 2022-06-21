@@ -91,6 +91,40 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
             return jr;
         }
 
+        /// <summary>
+        /// post 文件及 json 不可行，因为 application/json 的 Content-Type 无法附带文件，这个接口会报 415
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="file1"></param>
+        /// <param name="f1"></param>
+        /// <returns></returns>
+        [DisableRequestSizeLimit]
+        [HttpPost]
+        public JsonResult PostJsonError([FromQuery] string id, IFormFile file1, [FromBody]PostParam f1)
+        {
+            JsonResult jr = new JsonResult(new
+            {
+                Ret = 1,
+                Msg = "OK"
+            });
+            return jr;
+        }
+
+        /// <summary>
+        /// Json 不能和文件同时提交，不要重载， Swagger 会无法显示
+        /// </summary>
+        [DisableRequestSizeLimit]
+        [HttpPost]
+        public JsonResult PostJson([FromQuery] string id, [FromBody] PostParam f1)
+        {
+            JsonResult jr = new JsonResult(new
+            {
+                Ret = 1,
+                Msg = "OK"
+            });
+            return jr;
+        }
+
 
     }
 }
