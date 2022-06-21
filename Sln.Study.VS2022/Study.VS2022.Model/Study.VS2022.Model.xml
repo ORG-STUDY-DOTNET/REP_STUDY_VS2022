@@ -19,5 +19,25 @@
             页码
             </summary>
         </member>
+        <member name="T:Study.VS2022.Model.PostParamAndBody">
+            <summary>
+            一个 WebAPI 接口里只能有一个 FormBody。
+            </summary>
+        </member>
+        <member name="P:Study.VS2022.Model.PostParamAndBody.PageSize">
+            <summary>
+            页面大小
+            </summary>
+        </member>
+        <member name="P:Study.VS2022.Model.PostParamAndBody.PageIndex">
+            <summary>
+            页码
+            </summary>
+        </member>
+        <member name="P:Study.VS2022.Model.PostParamAndBody.File">
+            <summary>
+            文件
+            </summary>
+        </member>
     </members>
 </doc>
