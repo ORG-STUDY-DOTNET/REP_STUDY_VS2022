@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Cors;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Study.VS2022.Model;
@@ -8,13 +9,29 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
     /// <summary>
     /// AH1 Controller
     /// </summary>
-   
 
+    [Authorize]
     [Area("AR1")] // 添加 Area 和 Route 两个特性
     [Route("api/[area]/[controller]/[action]")]
     [ApiController]
     public class AH1Controller : ControllerBase
     {
+        /// <summary>
+        /// ！！！示例方法：拿到 Token
+        /// </summary>
+        [AllowAnonymous]
+        [HttpGet]
+        public JsonResult GetDemoAuth()
+        {
+            JsonResult jr = new JsonResult(new
+            {
+                Ret = 1,
+                Msg = "OK",
+                Data = JWTHelper.GetJWT(new TokenModel() { Name = "21", ID = 7})
+            });
+            return jr;
+        }
+
         /// <summary>
         /// GetByNoParam
         /// </summary>
