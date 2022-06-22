@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -19,12 +20,36 @@ namespace Study.VS2022.WebAPI
             builder.Services.AddEndpointsApiExplorer();
             //builder.Services.AddSwaggerGen();
 
+            #region 超大的 form 文件部分
+            builder.Services.Configure<FormOptions>(options => {
+                options.KeyLengthLimit = int.MaxValue;
+                options.ValueLengthLimit = int.MaxValue;
+                options.MultipartBodyLengthLimit = int.MaxValue;
+                options.MultipartHeadersLengthLimit = int.MaxValue;
+            });
+            #endregion
+
+            #region 代替 DisableRequestSizeLimit 的全局配置方案
+            //public static IHostBuilder CreateHostBuilder(string[] args) => Host.CreateDefaultBuilder(args).ConfigureWebHostDefaults(webBuilder => {
+            //    webBuilder.ConfigureKestrel((context, options) => {
+            //        //设置应用服务器Kestrel请求体最大为50MB
+
+            //        options.Limits.MaxRequestBodySize = 52428800;
+            //    });  
+            //    webBuilder.UseStartup();});
+            //Host.CreateDefaultBuilder(args).ConfigureWebHostDefaults(cfg => {
+            //    cfg.ConfigureKestrel((ctx, opt) => {
+            //        opt.Limits.MaxRequestBufferSize = int.MaxValue;
+            //    });
+            //});
+            #endregion
+
             #region Swagger Model Xml
             // 1. 注释掉上面的一句
             // 2. 添加下面的内容, 其中 Model 项目的生成 xml 路径设置为: .\Study.VS2022.Model.xml,
             // 并且设置为始终复制
             // 3. 通过下面的修改,使 Swagger 中包含对 Model 中类型的说明
-            builder.Services.AddSwaggerGen(c => 
+                    builder.Services.AddSwaggerGen(c => 
             {
                 c.SwaggerDoc("v1", new OpenApiInfo() 
                 {

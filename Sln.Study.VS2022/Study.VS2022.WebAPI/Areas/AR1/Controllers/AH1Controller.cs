@@ -10,6 +10,7 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
     /// AH1 Controller
     /// </summary>
 
+    [DisableRequestSizeLimit]
     [Authorize]
     [Area("AR1")] // 添加 Area 和 Route 两个特性
     [Route("api/[area]/[controller]/[action]")]
@@ -67,59 +68,9 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
         }
 
         /// <summary>
-        /// PostByModel
-        /// </summary>
-        /// <param name="body"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public JsonResult PostByModel([FromBody]PostParam body)
-        {
-            JsonResult jr = new JsonResult(new
-            {
-                Ret = 1,
-                Msg = "OK"
-            });
-            return jr;
-        }
-
-        // <param name="files">文件</param> List<IFormFile> files, 
-
-        /// <summary>
-        /// 单个 Query 参数与多文件上传(暂未处理大文件的上传)
-        /// </summary>
-        /// <param name="id">附加参数</param>
-        /// <param name="files">其它数据参数</param>
-        /// <returns></returns>
-        //[RequestSizeLimit(525336576)]//501MB
-        [DisableRequestSizeLimit]
-
-
-        //[RequestFormLimits(MultipartBodyLengthLimit = 524288000)]//500MB, which is already too high
-        [HttpPost]
-        public JsonResult PostFiles([FromQuery]string id, [FromForm]string f1, [FromForm] string f2, IList<IFormFile> files)
-        {
-            JsonResult jr = new JsonResult(new
-            {
-                Ret = 1,
-                Msg = "OK"
-            });
-            return jr;
-        }
-
-
-
-        #region 测试中的写法
-
-      
-
-        #endregion
-
-        #region 测试通过的写法
-
-        /// <summary>
         /// Json 不能和文件同时提交，不要重载， Swagger 会无法显示
         /// </summary>
-        [DisableRequestSizeLimit]
+        //[DisableRequestSizeLimit]
         [HttpPost]
         public JsonResult PostJson([FromQuery] string id, [FromBody] PostParam f1)
         {
@@ -168,9 +119,9 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
         /// <param name="file2"></param>
         /// <param name="f2"></param>
         /// <returns></returns>
-        [DisableRequestSizeLimit]
+        //[DisableRequestSizeLimit]
         [HttpPost]
-        public JsonResult PostFileAndForm([FromQuery] string id, IFormFile file1, [FromForm] string f1
+        public JsonResult PostFileAndForm_InEachParameter([FromQuery] string id, IFormFile file1, [FromForm] string f1
             , IFormFile file2, [FromForm] string f2)
         {
             #region 客户端写法
@@ -211,7 +162,30 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
             JsonResult jr = new JsonResult(new
             {
                 Ret = 1,
-                Msg = "OK"
+                Msg = "OK",
+                Data = "file1's Name is " + file1.Name
+            });
+            return jr;
+        }
+
+        /// <summary>
+        /// 单个 Query 参数与多文件上传(暂未处理大文件的上传)
+        /// </summary>
+        /// <param name="id">附加参数</param>
+        /// <param name="files">其它数据参数</param>
+        /// <returns></returns>
+        //[RequestSizeLimit(525336576)]//501MB
+        //[DisableRequestSizeLimit]
+        //[RequestFormLimits(MultipartBodyLengthLimit = 524288000)]//500MB, which is already too high
+        [HttpPost]
+        public JsonResult PostFileAndForm_MoreFilesAndParaInEachParameter([FromQuery] string id
+            , [FromForm] string f1, [FromForm] string f2, IList<IFormFile> files)
+        {
+            JsonResult jr = new JsonResult(new
+            {
+                Ret = 1,
+                Msg = "OK",
+                Data = "files'length" + files.Count
             });
             return jr;
         }
@@ -226,9 +200,9 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
         /// <param name="file2"></param>
         /// <param name="f2"></param>
         /// <returns></returns>
-        [DisableRequestSizeLimit]
+        //[DisableRequestSizeLimit]
         [HttpPost]
-        public JsonResult PostFileAndFormBody([FromQuery] string id, [FromForm] PostParamAndBody body)
+        public JsonResult PostFileAndForm_OneFileAndParasInOneParameter([FromQuery] string id, [FromForm] PostParamAndBody body)
         {
             #region 客户端写法
 
@@ -282,9 +256,9 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
         /// <param name="s1"></param>
         /// <param name="files"></param>
         /// <returns></returns>
-        [DisableRequestSizeLimit]
+        //[DisableRequestSizeLimit]
         [HttpPost]
-        public JsonResult PostMulFiles([FromQuery] string id, [FromForm] List<string> s1, IList<IFormFile> files)
+        public JsonResult PostFileAndForm_MulParasAndMulFilesInEachPara([FromQuery] string id, [FromForm] List<string> s1, IList<IFormFile> files)
         {
             #region 客户端写法
             /*
@@ -330,7 +304,61 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
             return jr;
         }
 
-        #endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        ///// <summary>
+        ///// PostByModel
+        ///// </summary>
+        ///// <param name="body"></param>
+        ///// <returns></returns>
+        //[HttpPost]
+        //public JsonResult PostByModel([FromBody]PostParam body)
+        //{
+        //    JsonResult jr = new JsonResult(new
+        //    {
+        //        Ret = 1,
+        //        Msg = "OK"
+        //    });
+        //    return jr;
+        //}
+
+        // <param name="files">文件</param> List<IFormFile> files, 
+
+
+
+
+
+
 
         #region 不可行的写法
 
@@ -341,7 +369,7 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
         /// <param name="body"></param>
         /// <returns></returns>
         [Obsolete]
-        [DisableRequestSizeLimit]
+        //[DisableRequestSizeLimit]
         [HttpPost]
         public JsonResult PostFileAndFormForms([FromQuery] string id, [FromForm] List<PostParamAndBody> body)
         {
@@ -360,7 +388,7 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
         /// <param name="body"></param>
         /// <returns></returns>
         [Obsolete]
-        [DisableRequestSizeLimit]
+        //[DisableRequestSizeLimit]
         [HttpPost]
         public JsonResult PostFileAndFormBodys([FromQuery] string id, [FromBody] List<PostParamAndBody> body)
         {
@@ -380,7 +408,7 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
         /// <param name="f1"></param>
         /// <returns></returns>
         [Obsolete]
-        [DisableRequestSizeLimit]
+        //[DisableRequestSizeLimit]
         [HttpPost]
         public JsonResult PostJsonError([FromQuery] string id, IFormFile file1, [FromBody] PostParam f1)
         {
@@ -399,7 +427,7 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
         ///// <param name="body1"></param>
         ///// <param name="body2"></param>
         ///// <returns></returns>
-        //[DisableRequestSizeLimit]
+        ////[DisableRequestSizeLimit]
         //[HttpPost]
         //public JsonResult PostFileAndMulFormBody([FromQuery] string id, [FromForm]PostParamAndBody body1
         //    , [FromForm] PostParamAndBody body2)
