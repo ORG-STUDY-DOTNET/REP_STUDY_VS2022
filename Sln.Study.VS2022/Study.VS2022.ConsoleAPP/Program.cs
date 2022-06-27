@@ -67,7 +67,7 @@ namespace Study.VS2022.ConsoleAPP
             // 反序列化字符串
             string strWithAuthStr = GetTest();
             Nancy.Json.JavaScriptSerializer jser = new JavaScriptSerializer();
-            retmodel obj = jser.Deserialize<retmodel>(strWithAuthStr);
+            RetModel2 obj = jser.Deserialize<RetModel2>(strWithAuthStr);
             
 
             Console.ReadKey();
