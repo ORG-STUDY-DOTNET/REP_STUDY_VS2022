@@ -101,6 +101,14 @@ namespace Study.VS2022.WebAPI
             });
             #endregion
 
+            #region 属性首字母改为大写
+            builder.Services.AddMvc().AddJsonOptions(x => {
+
+                // null 为不改变大小写
+                x.JsonSerializerOptions.PropertyNamingPolicy = null;
+            });
+            #endregion
+
             #region 跨域处理
             builder.Services.AddCors(options =>         // ----> 这一项不影响大文件上传问题
             {
