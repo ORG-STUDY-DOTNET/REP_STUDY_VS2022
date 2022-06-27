@@ -1,4 +1,6 @@
-﻿using System.Net;
+﻿using Nancy.Json;
+using Study.VS2022.Model;
+using System.Net;
 using System.Net.Http.Headers;
 
 namespace Study.VS2022.ConsoleAPP
@@ -8,7 +10,7 @@ namespace Study.VS2022.ConsoleAPP
         /// <summary>
         /// 不带身份信息，直接进行 Get 请求
         /// </summary>
-        static void GetTest()
+        static string GetTest()
         {
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri("http://localhost:5014/");
@@ -17,6 +19,7 @@ namespace Study.VS2022.ConsoleAPP
             tsres.Wait();
 
             string res = tsres.Result;
+            return res;
         }
 
         /// <summary>
@@ -60,6 +63,12 @@ namespace Study.VS2022.ConsoleAPP
             // 请求需要身份信息的接口
             // ----------------------
             //GetNeedAuth();
+
+            // 反序列化字符串
+            string strWithAuthStr = GetTest();
+            Nancy.Json.JavaScriptSerializer jser = new JavaScriptSerializer();
+            retmodel obj = jser.Deserialize<retmodel>(strWithAuthStr);
+            
 
             Console.ReadKey();
         }
