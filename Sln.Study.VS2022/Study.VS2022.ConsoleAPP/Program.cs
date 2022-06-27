@@ -2,6 +2,7 @@
 using Study.VS2022.Model;
 using System.Net;
 using System.Net.Http.Headers;
+using System.Text;
 
 namespace Study.VS2022.ConsoleAPP
 {
@@ -54,6 +55,50 @@ namespace Study.VS2022.ConsoleAPP
           
         }
 
+        /// <summary>
+        /// 内部会进行拿 Token 的过程，进行 PostJson 测试
+        /// </summary>
+        static void PostJsonNeedAuth()
+        {
+            // 拿 auth 字符串
+            string strWithAuthStr = GetTest();
+            Nancy.Json.JavaScriptSerializer jser = new JavaScriptSerializer();
+            RetModel2 obj = jser.Deserialize<RetModel2>(strWithAuthStr);
+            string authStr = (string)obj.Data;
+
+            // 发起请求
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("http://localhost:5014/");
+            //client.Timeout = new TimeSpan(0);
+
+            #region Headers
+            //client.DefaultRequestHeaders.Authorization 
+            //    = new AuthenticationHeaderValue(String.Format("Bearer {0}", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI3IiwiaWF0IjoiMTY1NjI5NzYyNiIsIm5iZiI6IjE2NTYyOTc2MjYiLCJleHAiOiIxNjU2Mjk3NzI2IiwiaXNzIjoiQVBJIiwiYXVkIjoiVXNlciJ9.lG3j40LX3R_udcPiW4J8rM7ztv2jLIhgBQk80o90Uxk"));
+            client.DefaultRequestHeaders.Add("Authorization"
+                , String.Format("Bearer {0}"
+                , authStr));
+            #endregion
+
+            var tsres = client.PostAsync("/api/AR1/AH1/PostJson?id=8899", new StringContent(String.Format(@"
+{{
+    ""PageSize"": 12,
+    ""PageIndex"": 13
+}}
+"), Encoding.UTF8, "application/json"));
+
+            try
+            {
+                var rasa = tsres.Result.Content.ReadAsStringAsync();
+                rasa.Wait();
+                string res = rasa.Result;
+                Console.WriteLine("res = {0}", res);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
         static void Main(string[] args)
         {
             // Get 请求测试
@@ -65,10 +110,14 @@ namespace Study.VS2022.ConsoleAPP
             //GetNeedAuth();
 
             // 反序列化字符串
-            string strWithAuthStr = GetTest();
-            Nancy.Json.JavaScriptSerializer jser = new JavaScriptSerializer();
-            RetModel2 obj = jser.Deserialize<RetModel2>(strWithAuthStr);
-            
+            //string strWithAuthStr = GetTest();
+            //Nancy.Json.JavaScriptSerializer jser = new JavaScriptSerializer();
+            //RetModel2 obj = jser.Deserialize<RetModel2>(strWithAuthStr);
+
+            //
+            PostJsonNeedAuth();
+
+
 
             Console.ReadKey();
         }
