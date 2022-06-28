@@ -8,6 +8,9 @@ namespace Study.VS2022.ConsoleAPP
 {
     internal class Program
     {
+        private static readonly string demofilepath //= @"C:\Users\Where\Downloads\EF Core Power Tools v2.5.1005.vsix";
+            = @"C:\Users\DEll\Downloads\cn_sql_server_2008_r2_enterprise_x86_x64_ia64_dvd_522233.iso";
+
         /// <summary>
         /// 不带身份信息，直接进行 Get 请求
         /// </summary>
@@ -126,7 +129,7 @@ namespace Study.VS2022.ConsoleAPP
             hrm.Content = new MultipartFormDataContent(boundary);
 
             // 添加文件
-            string fp1 = @"C:\Users\Where\Downloads\EF Core Power Tools v2.5.1005.vsix";
+            string fp1 = demofilepath;
             using (FileStream fs1 = File.Open(fp1, FileMode.Open))
             {
                 var bytes = new byte[fs1.Length];
@@ -151,7 +154,7 @@ namespace Study.VS2022.ConsoleAPP
             ((MultipartFormDataContent)hrm.Content).Add(p1);
 
             // 添加文件
-            string fp2 = @"C:\Users\Where\Downloads\EF Core Power Tools v2.5.1005.vsix";
+            string fp2 = demofilepath;
             using (FileStream fs1 = File.Open(fp2, FileMode.Open))
             {
                 var bytes = new byte[fs1.Length];
