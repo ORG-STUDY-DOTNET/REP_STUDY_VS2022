@@ -17,6 +17,14 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
     [ApiController]
     public class AH1Controller : ControllerBase
     {
+        //
+        private readonly IWebHostEnvironment _hostingEnvironment;
+
+        public AH1Controller(IWebHostEnvironment hostingEnvironment)
+        {
+            _hostingEnvironment = hostingEnvironment;
+        }
+
         /// <summary>
         /// ！！！示例方法：拿到 Token
         /// </summary>
@@ -28,7 +36,7 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
             {
                 Ret = 1,
                 Msg = "OK",
-                Data = JWTHelper.GetJWT(new TokenModel() { Name = "21", ID = 7})
+                Data = JWTHelper.GetJWT(new TokenModel() { Name = "21", ID = 7 })
             });
             return jr;
         }
@@ -59,7 +67,7 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
              */
             #endregion
 
-            JsonResult jr = new JsonResult(new 
+            JsonResult jr = new JsonResult(new
             {
                 Ret = 1,
                 Msg = "OK"
@@ -157,6 +165,23 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
     data.append("f2", '3ab');
     xhr.send(data);
              */
+            #endregion
+
+            #region 在服务器端保存文件
+            if (false)
+            {
+                //private readonly IWebHostEnvironment _hostingEnvironment;
+                //public AH1Controller(IWebHostEnvironment hostingEnvironment)
+                //{
+                //    _hostingEnvironment = hostingEnvironment;
+                //}
+
+                string tosavefilepath = Path.Combine(_hostingEnvironment.ContentRootPath, file1.FileName);
+                using (var fileStream = new FileStream(tosavefilepath, FileMode.Create))
+                {
+                    file1.CopyToAsync(fileStream).Wait();
+                }
+            } 
             #endregion
 
             JsonResult jr = new JsonResult(new
@@ -442,7 +467,7 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
 
         #endregion
 
-      
+
 
 
     }
