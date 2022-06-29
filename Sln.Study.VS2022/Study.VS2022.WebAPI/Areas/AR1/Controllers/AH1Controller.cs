@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OfficeOpenXml;
 using Study.VS2022.Model;
 
 namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
@@ -73,6 +74,49 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
                 Msg = "OK"
             });
             return jr;
+        }
+
+        /// <summary>
+        /// 下载 Excel 文件
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpGet]
+        public FileResult GetExcel()
+        {
+            //
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            // 创建
+            // ----
+            byte[] bytes;
+            MemoryStream memoryStream = new MemoryStream();
+            using (ExcelPackage ep = new ExcelPackage(memoryStream))
+            {
+                ExcelWorksheet sheet1 = ep.Workbook.Worksheets.Add("TheSheet1");
+                sheet1.Cells[1, 2].Value = "12";
+
+                ExcelWorksheet sheet2 = ep.Workbook.Worksheets.Add("TheSheet2");
+                sheet2.Cells[2, 3].Value = "23";
+
+                bytes = ep.GetAsByteArray();
+            }
+
+            // 返回
+            // ----
+            //FileResult fr = new FileStreamResult(  package.Stream
+            // , new Microsoft.Net.Http.Headers.MediaTypeHeaderValue("application/vnd.ms-excel"));
+
+            //FileResult fr = new FileStreamResult(package.Stream
+            // , new Microsoft.Net.Http.Headers.MediaTypeHeaderValue("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"));
+            //return fr;
+
+            //return File(
+            //    package.Stream,
+            //    "application/octet-stream",
+            //    "ExcelNameHere.xlsx");
+
+            return File(bytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "test.xlsx");
         }
 
         /// <summary>
@@ -181,7 +225,7 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
                 {
                     file1.CopyToAsync(fileStream).Wait();
                 }
-            } 
+            }
             #endregion
 
             JsonResult jr = new JsonResult(new
