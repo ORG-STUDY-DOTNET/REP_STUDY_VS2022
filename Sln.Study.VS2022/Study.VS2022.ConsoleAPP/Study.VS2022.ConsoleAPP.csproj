@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Study.VS2022.Common\Study.VS2022.Common.csproj" />
     <ProjectReference Include="..\Study.VS2022.Model\Study.VS2022.Model.csproj" />
   </ItemGroup>
 

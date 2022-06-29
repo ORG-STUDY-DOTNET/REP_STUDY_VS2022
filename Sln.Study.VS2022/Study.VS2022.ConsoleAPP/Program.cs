@@ -1,4 +1,5 @@
 ﻿using Nancy.Json;
+using Study.VS2022.Common;
 using Study.VS2022.Model;
 using System.Net;
 using System.Net.Http.Headers;
@@ -221,11 +222,23 @@ namespace Study.VS2022.ConsoleAPP
             //PostFileAndForm_InEachParameter();
 
             // 上传文件2
-            PostFileAndForm_MulParasAndMulFilesInEachPara();
+            //PostFileAndForm_MulParasAndMulFilesInEachPara();
 
-
+            // AES 加解密测试
+            AESTest();
 
             Console.ReadKey();
+        }
+
+        private static void AESTest()
+        {
+            var key = "99669966996699669966996699669966"; // 至少32位数字
+            var pazzword = "杰克马的财富密码";
+
+            string end = AESHelper.Encryption(pazzword, key);
+            Console.WriteLine(end);
+            string ded = AESHelper.Decryption(end, key);
+            Console.WriteLine(ded);
         }
 
         private static void PostFileAndForm_MulParasAndMulFilesInEachPara()
