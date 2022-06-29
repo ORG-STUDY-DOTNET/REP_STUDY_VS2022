@@ -225,9 +225,28 @@ namespace Study.VS2022.ConsoleAPP
             //PostFileAndForm_MulParasAndMulFilesInEachPara();
 
             // AES 加解密测试
-            AESTest();
+            //AESTest();
 
+            // 压缩、解压测试
+            // --------------
+            ZipAndUnZip();
+
+            
             Console.ReadKey();
+        }
+
+        private static void ZipAndUnZip()
+        {
+            string qqDir = @"D:\Program Files (x86)\Tencent\QQ";
+            string dest = @"D:\Program Files (x86)\QQ22\2.zip";
+
+            ZipHelper.ZipFile(qqDir, dest);
+
+            Console.WriteLine("OK1");
+
+            ZipHelper.UnZipFile(dest, @"D:\Program Files (x86)\Tencent\QQ3");
+
+            Console.WriteLine("OK2");
         }
 
         private static void AESTest()
