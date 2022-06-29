@@ -124,7 +124,7 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
         /// </summary>
         /// <returns></returns>
         [AllowAnonymous]
-        [HttpGet]
+        [HttpPost]
         public FileResult PostGetExcel()
         {
             //
