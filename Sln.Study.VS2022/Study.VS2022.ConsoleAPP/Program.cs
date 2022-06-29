@@ -235,9 +235,9 @@ namespace Study.VS2022.ConsoleAPP
             var key = "99669966996699669966996699669966"; // 至少32位数字
             var pazzword = "杰克马的财富密码";
 
-            string end = AESHelper.Encryption(pazzword, key);
+            string end = AESHelper.Encryption2(pazzword, key);
             Console.WriteLine(end);
-            string ded = AESHelper.Decryption(end, key);
+            string ded = AESHelper.Decryption2(end, key);
             Console.WriteLine(ded);
         }
 
