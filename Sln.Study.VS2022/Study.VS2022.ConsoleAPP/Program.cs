@@ -229,7 +229,10 @@ namespace Study.VS2022.ConsoleAPP
 
             // 压缩、解压测试
             // --------------
-            ZipAndUnZip();
+            //ZipAndUnZip();
+
+            // 文件拷贝测试
+            FileHelper.BigCopy(@"D:\222.txt", @"D:\2223.txt");
 
             
             Console.ReadKey();
