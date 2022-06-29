@@ -120,6 +120,49 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
         }
 
         /// <summary>
+        /// Post 方式下载 Excel（特别注意前端的调用过程）
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpGet]
+        public FileResult PostGetExcel()
+        {
+            //
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            // 创建
+            // ----
+            byte[] bytes;
+            MemoryStream memoryStream = new MemoryStream();
+            using (ExcelPackage ep = new ExcelPackage(memoryStream))
+            {
+                ExcelWorksheet sheet1 = ep.Workbook.Worksheets.Add("TheSheet1");
+                sheet1.Cells[1, 2].Value = "12";
+
+                ExcelWorksheet sheet2 = ep.Workbook.Worksheets.Add("TheSheet2");
+                sheet2.Cells[2, 3].Value = "23";
+
+                bytes = ep.GetAsByteArray();
+            }
+
+            // 返回
+            // ----
+            //FileResult fr = new FileStreamResult(  package.Stream
+            // , new Microsoft.Net.Http.Headers.MediaTypeHeaderValue("application/vnd.ms-excel"));
+
+            //FileResult fr = new FileStreamResult(package.Stream
+            // , new Microsoft.Net.Http.Headers.MediaTypeHeaderValue("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"));
+            //return fr;
+
+            //return File(
+            //    package.Stream,
+            //    "application/octet-stream",
+            //    "ExcelNameHere.xlsx");
+
+            return File(bytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "test.xlsx");
+        }
+
+        /// <summary>
         /// Json 不能和文件同时提交，不要重载， Swagger 会无法显示
         /// </summary>
         //[DisableRequestSizeLimit]
