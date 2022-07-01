@@ -240,12 +240,37 @@ namespace Study.VS2022.ConsoleAPP
             //Console.WriteLine("md5 is " + md5);
 
             // 执行 bat 文件
-            Console.WriteLine("begin 243");
-            string outstr = BatHelper.ExecBAT2(@"D:\test2.bat");
+            //Console.WriteLine("begin 243");
+            //string outstr = BatHelper.ExecBAT2(@"D:\test2.bat");
+
+            // 线程Demo
+            ThreadTest();
 
 
             Console.WriteLine("suc!");
             Console.ReadKey();
+        }
+
+        private static void ThreadTest()
+        {
+            Thread t1 = new Thread(new ThreadStart(() => {
+                Console.WriteLine("in t1");
+                Thread.Sleep(3000);
+                Console.WriteLine("in t1 end");
+            }));
+            Thread t2 = new Thread(new ThreadStart(() => {
+                Console.WriteLine("in t2");
+                Thread.Sleep(1000);
+                Console.WriteLine("in t2 end");
+            }));
+
+            t1.Start();
+            t2.Start();
+
+            t1.Join();
+            t2.Join();
+
+            Console.WriteLine("t1 t2 all complete!");
         }
 
         private static void ZipAndUnZip()
