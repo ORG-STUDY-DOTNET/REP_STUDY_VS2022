@@ -244,12 +244,69 @@ namespace Study.VS2022.ConsoleAPP
             //string outstr = BatHelper.ExecBAT2(@"D:\test2.bat");
 
             // 线程Demo
-            ThreadTest();
+            //ThreadTest();
+
+            // 线程 Demo Task 版
+            // 暂时没有中断和暂停
+            TaskTest();
+
+            #region Obsolete
+            //// async 与 Task, await
+            //// await 只能加到异步方法中，这里调用完，先执行后面的
+            ////AsyncTaskAwaitTest()
+            ////AsyncTaskAwaitTest().Wait();// 加了 Wait ，会等待执行完
+            //CancellationTokenSource tokenSource = new CancellationTokenSource(0);
+            //bool isComplete = AsyncTaskAwaitTest().Wait(0, tokenSource.Token); // 否完成了执行，返回 True。
+            //if (!isComplete)
+            //{
+            //    tokenSource.Cancel();
+            //}
+            //// 若未完成，也不会阻塞当前线程
+            //Console.WriteLine("isComplete = " + isComplete); 
+            #endregion
 
 
-            Console.WriteLine("suc!");
+
+
             Console.ReadKey();
         }
+
+        private static void TaskTest()
+        {
+            Task<string> t1 = new Task<string>(() => {
+                Thread.Sleep(2000);
+                Console.WriteLine("in t1");
+                return "t1 res";
+            });
+            Task<string> t2 = new Task<string>(() => {
+                Thread.Sleep(3000);
+                Console.WriteLine("in t2");
+                return "t2 res";
+            });
+            t1.Start();
+            t2.Start();
+            Task<string>[] ts = new Task<string>[] { t1, t2};
+            int index = Task.WaitAny(ts);
+            Console.WriteLine("Result is" + ts[index].Result);
+            Console.WriteLine("Task Test end");
+        }
+
+        #region Obsolete
+        ///// <summary>
+        ///// 该方法在其它主调过程调用时，如果不加 await，则不会阻塞当前线程。
+        ///// </summary>
+        //private static async Task AsyncTaskAwaitTest()
+        //{
+        //    await Task.Run(() => {
+        //        Console.WriteLine("r1");
+        //        Thread.Sleep(4000);
+        //        Console.WriteLine("r2");
+        //    });
+
+        //    // await 调用后，当前块的后面的内容，将作为回调的过程进行调用
+        //    Console.WriteLine("r end");
+        //} 
+        #endregion
 
         private static void ThreadTest()
         {
