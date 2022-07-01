@@ -232,9 +232,12 @@ namespace Study.VS2022.ConsoleAPP
             //ZipAndUnZip();
 
             // 文件拷贝测试
-            FileHelper.BigFileCopy(@"C:\Users\DEll\Downloads\大话设计模式2.pdf"
-                , @"C:\Users\DEll\Downloads\大话设计模式3.pdf", false, true);
+            //FileHelper.BigFileCopy(@"C:\Users\DEll\Downloads\大话设计模式2.pdf"
+            //    , @"C:\Users\DEll\Downloads\大话设计模式3.pdf", false, true);
 
+            // 文件计算 MD5 测试
+            string md5 = MD5Helper.GetMD5(@"C:\Users\DEll\Downloads\大话设计模式3.pdf", true);
+            Console.WriteLine("md5 is " + md5);
             
             Console.ReadKey();
         }
