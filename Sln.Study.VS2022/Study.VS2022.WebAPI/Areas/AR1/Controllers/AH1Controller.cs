@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
+using Study.VS2022.Common;
 using Study.VS2022.Model;
 
 namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
@@ -33,6 +34,17 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
         [HttpGet]
         public JsonResult GetDemoAuth()
         {
+            #region Redis 使用
+            RedisHelper redisHelper = new RedisHelper("127.0.0.1:6379");
+            bool r1 = redisHelper.SetValue("mykey", "hello123");
+            string saveValue = redisHelper.GetValue("mykey");
+            bool r2 = redisHelper.SetValue("mykey", "NewValue2");
+            saveValue = redisHelper.GetValue("mykey");
+            bool r3 = redisHelper.DeleteKey("mykey");
+            string uncacheValue = redisHelper.GetValue("mykey");
+            #endregion
+
+
             JsonResult jr = new JsonResult(new
             {
                 Ret = 1,
