@@ -114,7 +114,7 @@ namespace Study.VS2022.WebAPI
             {
                 options.AddPolicy("AllowSpecificOrigin", bd =>
                 {
-                    bd.WithOrigins("http://localhost:8080")
+                    bd.WithOrigins("http://localhost:8080", "http://localhost:8081")
                         .AllowAnyMethod()
                         .AllowAnyHeader()
                         .AllowCredentials();
