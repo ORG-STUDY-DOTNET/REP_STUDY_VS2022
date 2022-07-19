@@ -246,11 +246,13 @@ namespace Study.VS2022.ConsoleAPP
             // 线程Demo
             //ThreadTest();
 
-            // 线程 Demo Task 版
-            // 暂时没有中断和暂停
-            TaskTest();
+
 
             #region Obsolete
+            //// 线程 Demo Task 版
+            //// 暂时没有中断和暂停
+            //TaskTest();
+
             //// async 与 Task, await
             //// await 只能加到异步方法中，这里调用完，先执行后面的
             ////AsyncTaskAwaitTest()
@@ -265,31 +267,32 @@ namespace Study.VS2022.ConsoleAPP
             //Console.WriteLine("isComplete = " + isComplete); 
             #endregion
 
-
+            ZipHelper.UnZipFile(@"E:\【文档】\S171819相关的自动审核问题\PIDECT-01820210703.ZIP"
+, @"E:\【文档】\S171819相关的自动审核问题\aaa");
 
 
             Console.ReadKey();
         }
 
-        private static void TaskTest()
-        {
-            Task<string> t1 = new Task<string>(() => {
-                Thread.Sleep(2000);
-                Console.WriteLine("in t1");
-                return "t1 res";
-            });
-            Task<string> t2 = new Task<string>(() => {
-                Thread.Sleep(3000);
-                Console.WriteLine("in t2");
-                return "t2 res";
-            });
-            t1.Start();
-            t2.Start();
-            Task<string>[] ts = new Task<string>[] { t1, t2};
-            int index = Task.WaitAny(ts);
-            Console.WriteLine("Result is" + ts[index].Result);
-            Console.WriteLine("Task Test end");
-        }
+        //private static void TaskTest()
+        //{
+        //    Task<string> t1 = new Task<string>(() => {
+        //        Thread.Sleep(2000);
+        //        Console.WriteLine("in t1");
+        //        return "t1 res";
+        //    });
+        //    Task<string> t2 = new Task<string>(() => {
+        //        Thread.Sleep(3000);
+        //        Console.WriteLine("in t2");
+        //        return "t2 res";
+        //    });
+        //    t1.Start();
+        //    t2.Start();
+        //    Task<string>[] ts = new Task<string>[] { t1, t2};
+        //    int index = Task.WaitAny(ts);
+        //    Console.WriteLine("Result is" + ts[index].Result);
+        //    Console.WriteLine("Task Test end");
+        //}
 
         #region Obsolete
         ///// <summary>

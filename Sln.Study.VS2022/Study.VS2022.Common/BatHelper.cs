@@ -9,6 +9,7 @@ namespace Study.VS2022.Common
 {
     public class BatHelper
     {
+        [Obsolete]
         public static string ExecBAT(string fileName)
         {
             ProcessStartInfo pro = new System.Diagnostics.ProcessStartInfo("cmd.exe");
@@ -29,6 +30,7 @@ namespace Study.VS2022.Common
         }
 
         //另外一种获取方式，在bat中设置exit code
+        [Obsolete]
         public static string ExecBAT2(string fileName)
         {
             /* test2.bat
@@ -51,6 +53,28 @@ exit 0
             System.Diagnostics.Process proc = System.Diagnostics.Process.Start(pro);
             proc.WaitForExit();
             return proc.ExitCode.ToString();
+        }
+
+        /// <summary>
+        /// 执行某个程序，返回错误信息【未验证】
+        /// </summary>
+        /// <param name="exeFullPath"></param>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        public static string Exec(string exeFullPath, string args)
+        {
+            Process p = new Process();
+            p.StartInfo.FileName = exeFullPath;
+            p.StartInfo.UseShellExecute = false;
+            p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            p.StartInfo.Arguments = args;
+            p.StartInfo.RedirectStandardError = true;
+            p.Start();
+
+            // 用于显示执行sqlloader后的结果
+            string strExecuteSqlloaderResult = p.StandardError.ReadToEnd();
+            p.WaitForExit();
+            return strExecuteSqlloaderResult.Trim();
         }
 
         ///// <summary>
