@@ -20,11 +20,15 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
     public class AH1Controller : ControllerBase
     {
         //
+        private readonly IConfiguration _configuration;
+
+        //
         private readonly IWebHostEnvironment _hostingEnvironment;
 
-        public AH1Controller(IWebHostEnvironment hostingEnvironment)
+        public AH1Controller(IWebHostEnvironment hostingEnvironment, IConfiguration configuration)
         {
             _hostingEnvironment = hostingEnvironment;
+            _configuration = configuration;
         }
 
         /// <summary>
@@ -35,7 +39,10 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
         public JsonResult GetDemoAuth()
         {
             #region Redis 使用
-            RedisHelper redisHelper = new RedisHelper("127.0.0.1:6379");
+
+            string redisUrl = this._configuration["Redis:Url"];
+            RedisHelper redisHelper = new RedisHelper(redisUrl);
+
             bool r1 = redisHelper.SetValue("mykey", "hello123");
             string saveValue = redisHelper.GetValue("mykey");
             bool r2 = redisHelper.SetValue("mykey", "NewValue2");
