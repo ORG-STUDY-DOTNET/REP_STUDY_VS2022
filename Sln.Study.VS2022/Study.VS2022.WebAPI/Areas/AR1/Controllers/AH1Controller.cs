@@ -43,7 +43,7 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
             string redisUrl = this._configuration["Redis:Url"];
             RedisHelper redisHelper = new RedisHelper(redisUrl);
 
-            bool r1 = redisHelper.SetValue("mykey", "hello123");
+            bool r1 = redisHelper.SetValue("mykey", "hello123", new TimeSpan(0, 0, 1));
             string saveValue = redisHelper.GetValue("mykey");
             bool r2 = redisHelper.SetValue("mykey", "NewValue2");
             saveValue = redisHelper.GetValue("mykey");

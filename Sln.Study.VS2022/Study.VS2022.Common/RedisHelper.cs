@@ -29,6 +29,18 @@ namespace Study.VS2022.Common
         }
 
         /// <summary>
+        /// 增加/修改，带过期时间
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        /// <param name="ts">过期的 TimeSpan </param>
+        /// <returns></returns>
+        public bool SetValue(string key, string value, TimeSpan ts)
+        {
+            return db.StringSet(key, value, ts);
+        }
+
+        /// <summary>
         /// 查询
         /// </summary>
         /// <param name="key"></param>
