@@ -20,6 +20,13 @@ namespace Study.VS2022.WebAPI
             builder.Services.AddEndpointsApiExplorer();
             //builder.Services.AddSwaggerGen();
 
+            #region 验证码 Captcha 注入
+            builder.Services.AddSimpleCaptcha(builder =>
+            {
+                builder.UseMemoryStore();
+            });
+            #endregion
+
             #region 超大的 form 文件部分
             builder.Services.Configure<FormOptions>(options => {
                 options.KeyLengthLimit = int.MaxValue;

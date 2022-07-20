@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
+using SimpleCaptcha;
 using Study.VS2022.Common;
 using Study.VS2022.Model;
 
@@ -20,15 +21,21 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
     public class AH1Controller : ControllerBase
     {
         //
+        private readonly ICaptcha _captcha;
+
+        //
         private readonly IConfiguration _configuration;
 
         //
         private readonly IWebHostEnvironment _hostingEnvironment;
 
-        public AH1Controller(IWebHostEnvironment hostingEnvironment, IConfiguration configuration)
+        public AH1Controller(IWebHostEnvironment hostingEnvironment, IConfiguration configuration
+            , ICaptcha captcha
+            )
         {
             _hostingEnvironment = hostingEnvironment;
             _configuration = configuration;
+            _captcha = captcha;
         }
 
         /// <summary>
@@ -435,7 +442,29 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
             return jr;
         }
 
+        /// <summary>
+        /// 生成验证码
+        /// </summary>
+        /// <param name="guid">验证码批次</param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpGet]
+        public IActionResult ValidateCode([FromQuery]string guid)
+        {
+            // 生成 info 对象
+            // 创建流
+            var info = _captcha.Generate(guid);
+            var stream = new MemoryStream(info.CaptchaByteData);
 
+            // 拿 id 和 code
+            string codeValidate = info.CaptchaCode;
+            string idValidate = info.CaptchaId;
+
+            // 验证
+            bool isValid = _captcha.Validate(idValidate, codeValidate);
+
+            return File(stream, "image/png");
+        }
 
 
 
