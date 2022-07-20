@@ -63,7 +63,7 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
             {
                 Ret = 1,
                 Msg = "OK",
-                Data = JWTHelper.GetJWT(new TokenModel() { Name = "21", ID = 7 })
+                Data = JWTHelper.GetJWT(new TokenModel() { Name = "21", ID = 7 }, 10)
             });
             return jr;
         }
@@ -460,13 +460,44 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
             string codeValidate = info.CaptchaCode;
             string idValidate = info.CaptchaId;
 
-            // 验证
-            bool isValid = _captcha.Validate(idValidate, codeValidate);
+            // 验证码只能用一次
+            //bool isValid = _captcha.Validate(idValidate, codeValidate);
+            //isValid = _captcha.Validate(idValidate, codeValidate);
 
             return File(stream, "image/png");
         }
 
+        /// <summary>
+        /// 登录接口，返回 JWT
+        /// </summary>
+        /// <param name="vcodeguid">验证码批次</param>
+        /// <param name="uname">用户名</param>
+        /// <param name="endPwd">密码</param>
+        /// <param name="vcode">输入的验证码</param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost]
+        public JsonResult Login([FromQuery]string vcodeguid
+            , [FromForm]string uname
+            , [FromForm]string endPwd
+            , [FromForm]string vcode)
+        {
+            // 验证 vcode
+            bool codeIsRight = _captcha.Validate(vcodeguid, vcode);
+            if (!codeIsRight)
+            {
+                throw new Exception("验证码不正确！");
+            }
 
+            // 返回 jwt 信息
+            JsonResult jr = new JsonResult(new
+            {
+                Ret = 1,
+                Msg = "OK",
+                Data = JWTHelper.GetJWT(new TokenModel() { Name = "21", ID = 7 }, 10)
+            });
+            return jr;
+        }
 
 
 

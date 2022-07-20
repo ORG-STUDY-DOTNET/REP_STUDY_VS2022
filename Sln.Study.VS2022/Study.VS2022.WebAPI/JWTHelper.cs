@@ -51,8 +51,9 @@ namespace Study.VS2022.WebAPI
         /// 生成JWT字符串
         /// </summary>
         /// <param name="tokenModel"></param>
+        /// <param name="expireSeconds">过期时间，0为不过期</param>
         /// <returns></returns>
-        public static string GetJWT(TokenModel tokenModel)
+        public static string GetJWT(TokenModel tokenModel, int expireSeconds = 0)
         {
             //DateTime utc = DateTime.UtcNow;
             var claims = new List<Claim>
@@ -73,12 +74,25 @@ namespace Study.VS2022.WebAPI
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             var tokenHandler = new JwtSecurityTokenHandler();
-            JwtSecurityToken jwt = new JwtSecurityToken(
+            JwtSecurityToken jwt;
+            if (expireSeconds > 0)
+            {
+                jwt = new JwtSecurityToken(
+
+               claims: claims,// 声明的集合
+               expires: DateTime.Now.AddSeconds(expireSeconds),
+               signingCredentials: creds
+               );
+            }
+            else
+            {
+                jwt = new JwtSecurityToken(
 
                 claims: claims,// 声明的集合
                                //expires: .AddSeconds(36), // token的有效时间
                 signingCredentials: creds
                 );
+            }
             var handler = new JwtSecurityTokenHandler();
             // 生成 jwt字符串
             var strJWT = handler.WriteToken(jwt);
