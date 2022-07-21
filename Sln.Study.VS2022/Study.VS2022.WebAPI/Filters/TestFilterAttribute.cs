@@ -17,6 +17,9 @@ context.HttpContext.Request.Path
     Value: "/api/AR1/AH1/Login"
              */
 
+            // 用户名：
+            string currentUserName = context.HttpContext.User.Identity.Name;
+
 
 
             base.OnActionExecuting(context);

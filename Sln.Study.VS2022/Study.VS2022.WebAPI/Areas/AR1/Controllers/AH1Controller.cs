@@ -65,7 +65,7 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
             {
                 Ret = 1,
                 Msg = "OK",
-                Data = JWTHelper.GetJWT(new TokenModel() { Name = "21", ID = 7 }, 120)
+                Data = JWTHelper.GetJWT(new TokenModel() { Name = "21", ID = 7 }, Guid.NewGuid().ToString(),120)
             });
             return jr;
         }
@@ -496,7 +496,7 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
             {
                 Ret = 1,
                 Msg = "OK",
-                Data = JWTHelper.GetJWT(new TokenModel() { Name = "21", ID = 7 }, 120)
+                Data = JWTHelper.GetJWT(new TokenModel() { Name = "21", ID = 7 }, uname, 120)
             });
             return jr;
         }

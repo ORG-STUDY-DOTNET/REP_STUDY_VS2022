@@ -51,14 +51,18 @@ namespace Study.VS2022.WebAPI
         /// 生成JWT字符串
         /// </summary>
         /// <param name="tokenModel"></param>
+        /// <param name="userName">相关用户的用户名</param>
         /// <param name="expireSeconds">过期时间，0为不过期</param>
         /// <returns></returns>
-        public static string GetJWT(TokenModel tokenModel, int expireSeconds = 0)
+        public static string GetJWT(TokenModel tokenModel, string userName, int expireSeconds = 0)
         {
             //DateTime utc = DateTime.UtcNow;
             var claims = new List<Claim>
             {
                 // System.IdentityModel.Tokens.Jwt和Microsoft.AspNetCore.Authentication.JwtBearer
+
+                // 获取就使用 Response.HttpContext.User.Identity.Name 获取userName
+                new Claim(ClaimTypes.Name, userName),
 
                 new Claim(JwtRegisteredClaimNames.Jti,tokenModel.ID.ToString()),
                 // 令牌颁发时间
