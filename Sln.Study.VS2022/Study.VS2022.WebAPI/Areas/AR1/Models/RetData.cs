@@ -33,7 +33,7 @@
                     break;
             }
 
-            if (Enum.IsDefined(typeof(EData), data))
+            if (data != null && Enum.IsDefined(typeof(EData), data))
             {
                 switch ((EData)data)
                 {

@@ -495,13 +495,21 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
                 throw new Exception("验证码不正确！");
             }
 
-            // 返回 jwt 信息
-            JsonResult jr = new JsonResult(new
-            {
-                Ret = 1,
-                Msg = "OK",
-                Data = JWTHelper.GetJWT(new TokenModel() { Name = "21", ID = 7 }, uname, 120)
-            });
+            //// 返回 jwt 信息
+            //JsonResult jr = new JsonResult(new
+            //{
+            //    Ret = 1,
+            //    Msg = "OK",
+            //    Data = JWTHelper.GetJWT(new TokenModel() { Name = "21", ID = 7 }, uname, 120)
+            //});
+            //return jr;
+
+            //
+            string token = JWTHelper.GetJWT(new TokenModel() { Name = "21", ID = 7 }, uname, 120);
+
+            //
+            var rd = new RetData(ERet.OK, null, token);
+            JsonResult jr = new JsonResult(rd);
             return jr;
         }
 
