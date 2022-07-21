@@ -2,17 +2,19 @@
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using OfficeOpenXml;
 using SimpleCaptcha;
 using Study.VS2022.Common;
 using Study.VS2022.Model;
+using Study.VS2022.WebAPI.Filters;
 
 namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
 {
     /// <summary>
     /// AH1 Controller
     /// </summary>
-
+    [TestFilter]
     [DisableRequestSizeLimit]
     [Authorize]
     [Area("AR1")] // 添加 Area 和 Route 两个特性
@@ -499,7 +501,7 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
             return jr;
         }
 
-
+   
 
 
 
