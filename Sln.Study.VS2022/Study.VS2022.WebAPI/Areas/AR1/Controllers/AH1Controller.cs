@@ -3,11 +3,15 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Nancy.Json;
 using OfficeOpenXml;
 using SimpleCaptcha;
 using Study.VS2022.Common;
 using Study.VS2022.Model;
+using Study.VS2022.WebAPI.Areas.AR1.Models;
 using Study.VS2022.WebAPI.Filters;
+using System.Net;
+using System.Text;
 
 namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
 {
@@ -501,7 +505,72 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
             return jr;
         }
 
-   
+        #region 不同异常和错误情况的返回示例
+
+        /// <summary>
+        /// 返回状态码 401
+        /// </summary>
+        /// <param name="guid"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpGet]
+        public IActionResult Test_401([FromQuery] string guid)
+        {
+            var Result = new ContentResult
+            {
+                StatusCode = (int)HttpStatusCode.Unauthorized
+            };
+            return Result;
+        }
+
+        /// <summary>
+        /// 返回状态码 500
+        /// </summary>
+        /// <param name="guid"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpGet]
+        public IActionResult Test_500([FromQuery] string guid)
+        {
+            //throw new Exception("500 test");
+            var Result = new ContentResult
+            {
+                StatusCode = (int)HttpStatusCode.InternalServerError
+            };
+            return Result;
+        }
+
+        /// <summary>
+        /// 技术错误，前端需要输出技术层面问题
+        /// </summary>
+        /// <param name="guid"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        [AllowAnonymous]
+        [HttpGet]
+        public JsonResult Test_TechError([FromQuery] string guid)
+        {
+            var rd = new RetData(ERet.TECH_ERROR, "服务器端未完成", null);
+            JsonResult jr = new JsonResult(rd); 
+            return jr;
+        }
+
+        /// <summary>
+        /// 业务错误，前端需要弹出业务层面消息
+        /// </summary>
+        /// <param name="guid"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        [AllowAnonymous]
+        [HttpGet]
+        public JsonResult Test_BusiError([FromQuery] string guid)
+        {
+            var rd = new RetData(ERet.BUSI_ERROR, EData.UNAME_PWD_EMPTY_ERROR, null);
+            JsonResult jr = new JsonResult(rd);
+            return jr;
+        }
+
+        #endregion
 
 
 
