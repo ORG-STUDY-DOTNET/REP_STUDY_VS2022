@@ -488,28 +488,41 @@ namespace Study.VS2022.WebAPI.Areas.AR1.Controllers
             , [FromForm]string endPwd
             , [FromForm]string vcode)
         {
+            RetData rd;
+            JsonResult jr;
+
             // 验证 vcode
             bool codeIsRight = _captcha.Validate(vcodeguid, vcode);
             if (!codeIsRight)
             {
-                throw new Exception("验证码不正确！");
+                //
+                rd = new RetData(ERet.BUSI_ERROR, EData.VALIDATE_CODE_ERROR, null);
+                jr = new JsonResult(rd);
+                return jr;
             }
 
-            //// 返回 jwt 信息
-            //JsonResult jr = new JsonResult(new
-            //{
-            //    Ret = 1,
-            //    Msg = "OK",
-            //    Data = JWTHelper.GetJWT(new TokenModel() { Name = "21", ID = 7 }, uname, 120)
-            //});
-            //return jr;
+            // 用户验证
+            if (String.IsNullOrWhiteSpace(uname))
+            {
+                //
+                rd = new RetData(ERet.BUSI_ERROR, EData.UNAME_PWD_EMPTY_ERROR, null);
+                jr = new JsonResult(rd);
+                return jr;
+            }
+            if (!uname.Equals("System"))
+            {
+                //
+                rd = new RetData(ERet.BUSI_ERROR, EData.UNAME_PWD_INCORRECT, null);
+                jr = new JsonResult(rd);
+                return jr;
+            }
 
             //
             string token = JWTHelper.GetJWT(new TokenModel() { Name = "21", ID = 7 }, uname, 120);
 
             //
-            var rd = new RetData(ERet.OK, null, token);
-            JsonResult jr = new JsonResult(rd);
+            rd = new RetData(ERet.OK, null, token);
+            jr = new JsonResult(rd);
             return jr;
         }
 

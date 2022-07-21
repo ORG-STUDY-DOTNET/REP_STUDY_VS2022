@@ -10,7 +10,9 @@
     public enum EData
     {
         UNAME_PWD_EMPTY_ERROR,
-        UNAME_PWD_NOTEQUAL
+        UNAME_PWD_NOTEQUAL,
+        UNAME_PWD_INCORRECT,
+        VALIDATE_CODE_ERROR
     }
 
     public class RetData
@@ -42,6 +44,12 @@
                         break;
                     case EData.UNAME_PWD_NOTEQUAL:
                         this.Data = "UNAME_PWD_NOTEQUAL";
+                        break;
+                    case EData.VALIDATE_CODE_ERROR:
+                        this.Data = "VALIDATE_CODE_ERROR";
+                        break;
+                    case EData.UNAME_PWD_INCORRECT:
+                        this.Data = "UNAME_PWD_INCORRECT";
                         break;
                     default:
                         break;
