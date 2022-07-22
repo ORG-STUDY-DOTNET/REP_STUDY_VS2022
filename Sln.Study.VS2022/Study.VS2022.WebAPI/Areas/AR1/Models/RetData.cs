@@ -2,16 +2,42 @@
 {
     public enum ERet
     {
+        /// <summary>
+        /// 技术层面错误，前端日志输出
+        /// </summary>
         TECH_ERROR,
+
+        /// <summary>
+        /// 业务层面错误，前端根据需求，通过 data 进行本地化文字渲染
+        /// </summary>
         BUSI_ERROR,
+
+        /// <summary>
+        /// 无错误
+        /// </summary>
         OK
     }
 
     public enum EData
     {
+        /// <summary>
+        /// 用户名及密码为空（不建议）
+        /// </summary>
         UNAME_PWD_EMPTY_ERROR,
+
+        /// <summary>
+        /// 已废弃，不使用（不建议）
+        /// </summary>
         UNAME_PWD_NOTEQUAL,
+
+        /// <summary>
+        /// 用户名密码不正确（不建议）
+        /// </summary>
         UNAME_PWD_INCORRECT,
+
+        /// <summary>
+        /// 验证码不正确
+        /// </summary>
         VALIDATE_CODE_ERROR
     }
 
@@ -19,41 +45,47 @@
     {
         public RetData(ERet ret, object data, string token = null)
         {
-            switch (ret)
-            {
-                case ERet.TECH_ERROR:
-                    this.Ret = "TECH_ERROR";
-                    break;
-                case ERet.BUSI_ERROR:
-                    this.Ret = "BUSI_ERROR";
-                    break;
-                case ERet.OK:
-                    this.Ret = "OK";
-                    break;
-                default:
-                    this.Ret = "OK";
-                    break;
-            }
+            #region switch 写法（废弃）
+            //switch (ret)
+            //{
+            //    case ERet.TECH_ERROR:
+            //        this.Ret = "TECH_ERROR";
+            //        break;
+            //    case ERet.BUSI_ERROR:
+            //        this.Ret = "BUSI_ERROR";
+            //        break;
+            //    case ERet.OK:
+            //        this.Ret = "OK";
+            //        break;
+            //    default:
+            //        this.Ret = "OK";
+            //        break;
+            //} 
+            #endregion
+            this.Ret = Enum.GetName(typeof(ERet), ret);
 
             if (data != null && Enum.IsDefined(typeof(EData), data))
             {
-                switch ((EData)data)
-                {
-                    case EData.UNAME_PWD_EMPTY_ERROR:
-                        this.Data = "UNAME_PWD_EMPTY_ERROR";
-                        break;
-                    case EData.UNAME_PWD_NOTEQUAL:
-                        this.Data = "UNAME_PWD_NOTEQUAL";
-                        break;
-                    case EData.VALIDATE_CODE_ERROR:
-                        this.Data = "VALIDATE_CODE_ERROR";
-                        break;
-                    case EData.UNAME_PWD_INCORRECT:
-                        this.Data = "UNAME_PWD_INCORRECT";
-                        break;
-                    default:
-                        break;
-                }
+                #region switch 写法（废弃）
+                //switch ((EData)data)
+                //{
+                //    case EData.UNAME_PWD_EMPTY_ERROR:
+                //        this.Data = "UNAME_PWD_EMPTY_ERROR";
+                //        break;
+                //    case EData.UNAME_PWD_NOTEQUAL:
+                //        this.Data = "UNAME_PWD_NOTEQUAL";
+                //        break;
+                //    case EData.VALIDATE_CODE_ERROR:
+                //        this.Data = "VALIDATE_CODE_ERROR";
+                //        break;
+                //    case EData.UNAME_PWD_INCORRECT:
+                //        this.Data = "UNAME_PWD_INCORRECT";
+                //        break;
+                //    default:
+                //        break;
+                //} 
+                #endregion
+                this.Data = Enum.GetName(typeof(EData), data);
             }
             else
             {
