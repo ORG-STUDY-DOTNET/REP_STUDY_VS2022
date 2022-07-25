@@ -9,7 +9,7 @@
   <ItemGroup>
     <PackageReference Include="EPPlus" Version="6.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.6" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.6" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.7" />
     <PackageReference Include="Nancy" Version="2.0.0" />
     <PackageReference Include="SimpleCaptcha" Version="1.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
@@ -19,6 +19,8 @@
   <ItemGroup>
     <Folder Include="Areas\AR1\Data\" />
     <Folder Include="Areas\AR1\Views\" />
+    <Folder Include="Areas\ARUser\Data\" />
+    <Folder Include="Areas\ARUser\Views\" />
   </ItemGroup>
 
   <ItemGroup>
